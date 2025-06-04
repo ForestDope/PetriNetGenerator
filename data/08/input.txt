@@ -1,0 +1,1 @@
+Check user subscription status. If the status is 'Premium', unlock feature A. If the status is 'Basic', display upgrade message B.

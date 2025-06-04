@@ -1,0 +1,1 @@
+Load the first image 'img1.jpg'. Display the image. Wait for the user to click the 'Next' button. When 'Next' is clicked, load and display the second image 'img2.jpg'. When 'Next' is clicked after the second image, the slideshow ends.

@@ -1,0 +1,26 @@
+{
+    "places": {
+      "p_start": "Start",
+      "p_video_playing": "Video Playing",
+      "p_video_finished": "Video Finished",
+      "p_pdf_downloading": "PDF Downloading",
+      "p_pdf_finished": "PDF Download Finished"
+    },
+    "transitions": {
+      "t_begin_session": "Begin Session",
+      "t_finish_video": "Finish Video Playback",
+      "t_finish_download": "Finish PDF Download"
+    },
+    "arcs": [
+      { "from": "p_start", "to": "t_begin_session" },
+      { "from": "t_begin_session", "to": "p_video_playing" },
+      { "from": "t_begin_session", "to": "p_pdf_downloading" },
+      { "from": "p_video_playing", "to": "t_finish_video" },
+      { "from": "t_finish_video", "to": "p_video_finished" },
+      { "from": "p_pdf_downloading", "to": "t_finish_download" },
+      { "from": "t_finish_download", "to": "p_pdf_finished" }
+    ],
+    "initial": {
+      "p_start": 1
+    }
+  }

@@ -1,0 +1,1 @@
+Show two buttons: 'Play Music' and 'Play Video'. If the user clicks 'Play Music', start playing 'background.ogg'. If the user clicks 'Play Video', start playing 'promo.mkv'.

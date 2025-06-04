@@ -1,0 +1,32 @@
+{
+    "places": {
+      "p_idle": "Idle",
+      "p_img1_loaded": "Image 1 Loaded",
+      "p_img1_showing": "Image 1 Showing",
+      "p_img2_loaded": "Image 2 Loaded",
+      "p_img2_showing": "Image 2 Showing",
+      "p_slideshow_ended": "Slideshow Ended"
+    },
+    "transitions": {
+      "t_load1": "Load Image 1",
+      "t_show1": "Show Image 1",
+      "t_load2": "Load Image 2",
+      "t_show2": "Show Image 2",
+      "t_click_next": "Click Next after Img2"
+    },
+    "arcs": [
+      { "from": "p_idle", "to": "t_load1" },
+      { "from": "t_load1", "to": "p_img1_loaded" },
+      { "from": "p_img1_loaded", "to": "t_show1" },
+      { "from": "t_show1", "to": "p_img1_showing" },
+      { "from": "p_img1_showing", "to": "t_load2" },
+      { "from": "t_load2", "to": "p_img2_loaded" },
+      { "from": "p_img2_loaded", "to": "t_show2" },
+      { "from": "t_show2", "to": "p_img2_showing" },
+      { "from": "p_img2_showing", "to": "t_click_next" },
+      { "from": "t_click_next", "to": "p_slideshow_ended" }
+    ],
+    "initial": {
+      "p_idle": 1
+    }
+  }

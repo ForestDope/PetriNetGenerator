@@ -1,0 +1,1 @@
+Begin presentation section 'Intro'. Simultaneously load slide 'intro_slide.png' and load audio 'intro_audio.mp3'. Once both the slide and the audio are loaded, display the slide and play the audio together.

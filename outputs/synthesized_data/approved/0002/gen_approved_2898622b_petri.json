@@ -1,0 +1,151 @@
+{
+  "places": {
+    "p_system_off": "System Off",
+    "p_main_menu": "Main Menu",
+    "p_music_playing": "Music Playing",
+    "p_music_paused": "Music Paused",
+    "p_video_playing": "Video Playing",
+    "p_video_paused": "Video Paused",
+    "p_full_screen_video": "Full Screen Video"
+  },
+  "transitions": {
+    "t_turn_on": "Turn On System",
+    "t_turn_off": "Turn Off System",
+    "t_select_music": "Select Music",
+    "t_select_video": "Select Video",
+    "t_pause_music": "Pause Music",
+    "t_resume_music": "Resume Music",
+    "t_stop_music": "Stop Music",
+    "t_skip_track": "Skip Track",
+    "t_pause_video": "Pause Video",
+    "t_resume_video": "Resume Video",
+    "t_stop_video": "Stop Video",
+    "t_enter_fullscreen": "Enter Full Screen",
+    "t_exit_fullscreen": "Exit Full Screen"
+  },
+  "arcs": [
+    {
+      "from": "p_system_off",
+      "to": "t_turn_on"
+    },
+    {
+      "from": "t_turn_on",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_turn_off"
+    },
+    {
+      "from": "t_turn_off",
+      "to": "p_system_off"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_music"
+    },
+    {
+      "from": "t_select_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_pause_music"
+    },
+    {
+      "from": "t_pause_music",
+      "to": "p_music_paused"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_resume_music"
+    },
+    {
+      "from": "t_resume_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_stop_music"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_stop_music"
+    },
+    {
+      "from": "t_stop_music",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_skip_track"
+    },
+    {
+      "from": "t_skip_track",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_video"
+    },
+    {
+      "from": "t_select_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_pause_video"
+    },
+    {
+      "from": "t_pause_video",
+      "to": "p_video_paused"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_resume_video"
+    },
+    {
+      "from": "t_resume_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "t_stop_video",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_enter_fullscreen"
+    },
+    {
+      "from": "t_enter_fullscreen",
+      "to": "p_full_screen_video"
+    },
+    {
+      "from": "p_full_screen_video",
+      "to": "t_exit_fullscreen"
+    },
+    {
+      "from": "t_exit_fullscreen",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_full_screen_video",
+      "to": "t_pause_video"
+    },
+    {
+      "from": "p_full_screen_video",
+      "to": "t_stop_video"
+    }
+  ],
+  "initial": {
+    "p_system_off": 1
+  }
+}

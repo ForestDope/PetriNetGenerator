@@ -1,0 +1,1 @@
+Load the video 'tutorial.mp4'. Once loaded, begin playing the video. While the video is playing, the user can press a 'Stop' button. If 'Stop' is pressed, playback ceases. If the video finishes playing normally, playback also ceases.

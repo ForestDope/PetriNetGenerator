@@ -1,0 +1,27 @@
+{
+    "places": {
+      "p_idle": "Idle",
+      "p_loaded": "Video Loaded",
+      "p_playing": "Video Playing",
+      "p_stopped": "Playback Stopped"
+    },
+    "transitions": {
+      "t_load_video": "Load Video",
+      "t_start_play": "Start Playback",
+      "t_press_stop": "User Presses Stop",
+      "t_video_ends": "Video Finishes Normally"
+    },
+    "arcs": [
+      { "from": "p_idle", "to": "t_load_video" },
+      { "from": "t_load_video", "to": "p_loaded" },
+      { "from": "p_loaded", "to": "t_start_play" },
+      { "from": "t_start_play", "to": "p_playing" },
+      { "from": "p_playing", "to": "t_press_stop" },
+      { "from": "t_press_stop", "to": "p_stopped" },
+      { "from": "p_playing", "to": "t_video_ends" },
+      { "from": "t_video_ends", "to": "p_stopped" }
+    ],
+    "initial": {
+      "p_idle": 1
+    }
+  }

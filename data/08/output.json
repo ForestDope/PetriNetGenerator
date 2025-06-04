@@ -1,0 +1,24 @@
+{
+    "places": {
+      "p_start_check": "Start Checking Status",
+      "p_status_checked": "Subscription Status Checked",
+      "p_feature_A_unlocked": "Feature A Unlocked",
+      "p_message_B_shown": "Upgrade Message B Shown"
+    },
+    "transitions": {
+      "t_check_status": "Check User Subscription Status",
+      "t_process_premium": "Process Premium Status",
+      "t_process_basic": "Process Basic Status"
+    },
+    "arcs": [
+      { "from": "p_start_check", "to": "t_check_status" },
+      { "from": "t_check_status", "to": "p_status_checked" },
+      { "from": "p_status_checked", "to": "t_process_premium" },
+      { "from": "t_process_premium", "to": "p_feature_A_unlocked" },
+      { "from": "p_status_checked", "to": "t_process_basic" },
+      { "from": "t_process_basic", "to": "p_message_B_shown" }
+    ],
+    "initial": {
+      "p_start_check": 1
+    }
+  }

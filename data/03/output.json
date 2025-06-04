@@ -1,0 +1,31 @@
+{
+    "places": {
+      "p_start": "Start",
+      "p_slide_loading": "Slide Loading",
+      "p_audio_loading": "Audio Loading",
+      "p_slide_ready": "Slide Ready",
+      "p_audio_ready": "Audio Ready",
+      "p_presenting": "Presenting Slide and Audio"
+    },
+    "transitions": {
+      "t_start_intro": "Start Intro Section",
+      "t_finish_slide_load": "Finish Slide Load",
+      "t_finish_audio_load": "Finish Audio Load",
+      "t_start_presentation": "Start Presentation"
+    },
+    "arcs": [
+      { "from": "p_start", "to": "t_start_intro" },
+      { "from": "t_start_intro", "to": "p_slide_loading" },
+      { "from": "t_start_intro", "to": "p_audio_loading" },
+      { "from": "p_slide_loading", "to": "t_finish_slide_load" },
+      { "from": "t_finish_slide_load", "to": "p_slide_ready" },
+      { "from": "p_audio_loading", "to": "t_finish_audio_load" },
+      { "from": "t_finish_audio_load", "to": "p_audio_ready" },
+      { "from": "p_slide_ready", "to": "t_start_presentation" },
+      { "from": "p_audio_ready", "to": "t_start_presentation" },
+      { "from": "t_start_presentation", "to": "p_presenting" }
+    ],
+    "initial": {
+      "p_start": 1
+    }
+  }

@@ -1,0 +1,20 @@
+{
+    "places": {
+      "p_choice_pending": "Waiting for User Choice",
+      "p_music_playing": "Music Playing",
+      "p_video_playing": "Video Playing"
+    },
+    "transitions": {
+      "t_choose_music": "User Clicks 'Play Music'",
+      "t_choose_video": "User Clicks 'Play Video'"
+    },
+    "arcs": [
+      { "from": "p_choice_pending", "to": "t_choose_music" },
+      { "from": "t_choose_music", "to": "p_music_playing" },
+      { "from": "p_choice_pending", "to": "t_choose_video" },
+      { "from": "t_choose_video", "to": "p_video_playing" }
+    ],
+    "initial": {
+      "p_choice_pending": 1
+    }
+  }

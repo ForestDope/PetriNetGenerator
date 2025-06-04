@@ -1,0 +1,1 @@
+First, load the application configuration file. After the config is loaded, load the user profile. Once the profile is loaded, load the main media asset. Only then, display the application interface.

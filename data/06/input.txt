@@ -1,0 +1,1 @@
+There is one main display area. Request to show image 'logo.png' can be made. Request to show video 'ad.mp4' can also be made. Only one item can be shown at a time. When an item is finished or removed, the display area becomes available again.

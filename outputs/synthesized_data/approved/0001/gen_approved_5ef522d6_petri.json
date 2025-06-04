@@ -1,0 +1,106 @@
+{
+  "places": {
+    "p_idle": "System Idle",
+    "p_music_playing": "Music Playing",
+    "p_music_paused": "Music Paused",
+    "p_video_playing": "Video Playing (Normal Mode)",
+    "p_full_screen_video": "Full Screen Video"
+  },
+  "transitions": {
+    "t_start_music": "Start Music",
+    "t_pause_music": "Pause Music",
+    "t_resume_music": "Resume Music",
+    "t_stop_music_playing": "Stop Music (from Playing)",
+    "t_stop_music_paused": "Stop Music (from Paused)",
+    "t_start_video": "Start Video",
+    "t_enter_full_screen": "Enter Full Screen",
+    "t_exit_full_screen": "Exit Full Screen",
+    "t_stop_video_normal": "Stop Video (from Normal Mode)",
+    "t_stop_video_fullscreen": "Stop Video (from Full Screen)"
+  },
+  "arcs": [
+    {
+      "from": "p_idle",
+      "to": "t_start_music"
+    },
+    {
+      "from": "t_start_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_pause_music"
+    },
+    {
+      "from": "t_pause_music",
+      "to": "p_music_paused"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_resume_music"
+    },
+    {
+      "from": "t_resume_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_stop_music_playing"
+    },
+    {
+      "from": "t_stop_music_playing",
+      "to": "p_idle"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_stop_music_paused"
+    },
+    {
+      "from": "t_stop_music_paused",
+      "to": "p_idle"
+    },
+    {
+      "from": "p_idle",
+      "to": "t_start_video"
+    },
+    {
+      "from": "t_start_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_enter_full_screen"
+    },
+    {
+      "from": "t_enter_full_screen",
+      "to": "p_full_screen_video"
+    },
+    {
+      "from": "p_full_screen_video",
+      "to": "t_exit_full_screen"
+    },
+    {
+      "from": "t_exit_full_screen",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_stop_video_normal"
+    },
+    {
+      "from": "t_stop_video_normal",
+      "to": "p_idle"
+    },
+    {
+      "from": "p_full_screen_video",
+      "to": "t_stop_video_fullscreen"
+    },
+    {
+      "from": "t_stop_video_fullscreen",
+      "to": "p_idle"
+    }
+  ],
+  "initial": {
+    "p_idle": 1
+  }
+}

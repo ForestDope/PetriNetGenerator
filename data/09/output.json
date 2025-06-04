@@ -1,0 +1,16 @@
+{
+    "places": {
+      "p_showing_cover": "Showing Cover Image",
+      "p_showing_content": "Showing Main Content"
+    },
+    "transitions": {
+      "t_click_reveal": "User Clicks Cover"
+    },
+    "arcs": [
+      { "from": "p_showing_cover", "to": "t_click_reveal" },
+      { "from": "t_click_reveal", "to": "p_showing_content" }
+    ],
+    "initial": {
+      "p_showing_cover": 1
+    }
+  }

@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "places": {
+      "type": "object",
+      "description": "A dictionary of places, where keys are place IDs and values are place labels (strings).",
+      "patternProperties": {
+        "^[a-zA-Z0-9_\\-]+$": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "transitions": {
+      "type": "object",
+      "description": "A dictionary of transitions, where keys are transition IDs and values are transition labels (strings).",
+      "patternProperties": {
+        "^[a-zA-Z0-9_\\-]+$": { "type": "string" }
+      },
+      "additionalProperties": false,
+      "minProperties": 1
+    },
+    "arcs": {
+      "type": "array",
+      "description": "An array of arc objects, each defining a connection between a source and a target node.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "The ID of the source node (must be a defined place or transition ID)."
+          },
+          "to": {
+            "type": "string",
+            "description": "The ID of the target node (must be a defined place or transition ID)."
+          }
+        },
+        "required": ["from", "to"],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "initial": {
+      "type": "object",
+      "description": "A dictionary defining the initial marking of the Petri net. Keys are place IDs, values are the number of tokens (integers, >=1).",
+      "patternProperties": {
+        "^[a-zA-Z0-9_\\-]+$": { "type": "integer", "minimum": 1 }
+      },
+      "additionalProperties": false,
+      "minProperties": 0
+    }
+  },
+  "required": ["places", "transitions", "arcs", "initial"],
+  "additionalProperties": false
+}

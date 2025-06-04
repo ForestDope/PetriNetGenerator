@@ -1,0 +1,27 @@
+{
+    "places": {
+      "p_start": "Start",
+      "p_loading": "Loading Data",
+      "p_showing_anim": "Showing Animation",
+      "p_loaded_no_anim": "Data Loaded, Animation Stopped",
+      "p_data_shown": "Data Shown"
+    },
+    "transitions": {
+      "t_start": "Start Load Process",
+      "t_finish_load": "Finish Loading and Stop Animation",
+      "t_show_data": "Show Data"
+    },
+    "arcs": [
+      { "from": "p_start", "to": "t_start" },
+      { "from": "t_start", "to": "p_loading" },
+      { "from": "t_start", "to": "p_showing_anim" },
+      { "from": "p_loading", "to": "t_finish_load" },
+      { "from": "p_showing_anim", "to": "t_finish_load" },
+      { "from": "t_finish_load", "to": "p_loaded_no_anim" },
+      { "from": "p_loaded_no_anim", "to": "t_show_data" },
+      { "from": "t_show_data", "to": "p_data_shown" }
+    ],
+    "initial": {
+      "p_start": 1
+    }
+  }

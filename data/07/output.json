@@ -1,0 +1,28 @@
+{
+    "places": {
+      "p_start": "Start",
+      "p_config_loaded": "Config Loaded",
+      "p_profile_loaded": "Profile Loaded",
+      "p_asset_loaded": "Media Asset Loaded",
+      "p_interface_shown": "Application Interface Shown"
+    },
+    "transitions": {
+      "t_load_config": "Load Config File",
+      "t_load_profile": "Load User Profile",
+      "t_load_asset": "Load Main Media Asset",
+      "t_show_interface": "Show Application Interface"
+    },
+    "arcs": [
+      { "from": "p_start", "to": "t_load_config" },
+      { "from": "t_load_config", "to": "p_config_loaded" },
+      { "from": "p_config_loaded", "to": "t_load_profile" },
+      { "from": "t_load_profile", "to": "p_profile_loaded" },
+      { "from": "p_profile_loaded", "to": "t_load_asset" },
+      { "from": "t_load_asset", "to": "p_asset_loaded" },
+      { "from": "p_asset_loaded", "to": "t_show_interface" },
+      { "from": "t_show_interface", "to": "p_interface_shown" }
+    ],
+    "initial": {
+      "p_start": 1
+    }
+  }

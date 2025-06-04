@@ -1,0 +1,26 @@
+{
+    "places": {
+      "p_display_free": "Display Area Free",
+      "p_showing_image": "Showing Image",
+      "p_showing_video": "Showing Video"
+    },
+    "transitions": {
+      "t_request_image": "Request Image Display",
+      "t_request_video": "Request Video Display",
+      "t_release_image": "Release Image from Display",
+      "t_release_video": "Release Video from Display"
+    },
+    "arcs": [
+      { "from": "p_display_free", "to": "t_request_image" },
+      { "from": "t_request_image", "to": "p_showing_image" },
+      { "from": "p_display_free", "to": "t_request_video" },
+      { "from": "t_request_video", "to": "p_showing_video" },
+      { "from": "p_showing_image", "to": "t_release_image" },
+      { "from": "t_release_image", "to": "p_display_free" },
+      { "from": "p_showing_video", "to": "t_release_video" },
+      { "from": "t_release_video", "to": "p_display_free" }
+    ],
+    "initial": {
+      "p_display_free": 1
+    }
+  }

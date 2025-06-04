@@ -1,0 +1,1 @@
+Start loading data. While loading, display a 'Loading...' animation. When loading finishes, hide the animation and show the data.
