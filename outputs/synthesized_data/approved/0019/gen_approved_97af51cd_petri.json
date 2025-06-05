@@ -1,0 +1,207 @@
+{
+  "places": {
+    "p_main_menu": "Main Menu",
+    "p_video_playing": "Video Playing (Normal View)",
+    "p_video_paused": "Video Paused (Normal View)",
+    "p_video_fs_playing": "Video Full Screen Playing",
+    "p_video_fs_paused": "Video Full Screen Paused",
+    "p_audio_playing": "Audio Playing",
+    "p_audio_paused": "Audio Paused"
+  },
+  "transitions": {
+    "t_select_video": "Select Video",
+    "t_pause_normal_video": "Pause Normal Video",
+    "t_resume_normal_video": "Resume Normal Video",
+    "t_enter_fs_from_normal_playing": "Enter Full Screen from Normal Playing",
+    "t_enter_fs_from_normal_paused": "Enter Full Screen from Normal Paused",
+    "t_exit_fs_to_normal_playing": "Exit Full Screen to Normal Playing",
+    "t_exit_fs_to_normal_paused": "Exit Full Screen to Normal Paused",
+    "t_pause_fs_video": "Pause Full Screen Video",
+    "t_resume_fs_video": "Resume Full Screen Video",
+    "t_video_ends_normal": "Video Ends (Normal View)",
+    "t_video_ends_fs": "Video Ends (Full Screen)",
+    "t_back_to_menu_v_play": "Back to Menu (Video Playing)",
+    "t_back_to_menu_v_pause": "Back to Menu (Video Paused)",
+    "t_back_to_menu_v_fs_play": "Back to Menu (Video FS Playing)",
+    "t_back_to_menu_v_fs_pause": "Back to Menu (Video FS Paused)",
+    "t_select_audio": "Select Audio",
+    "t_pause_audio": "Pause Audio",
+    "t_resume_audio": "Resume Audio",
+    "t_audio_ends": "Audio Ends",
+    "t_back_to_menu_a_play": "Back to Menu (Audio Playing)",
+    "t_back_to_menu_a_pause": "Back to Menu (Audio Paused)"
+  },
+  "arcs": [
+    {
+      "from": "p_main_menu",
+      "to": "t_select_video"
+    },
+    {
+      "from": "t_select_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_pause_normal_video"
+    },
+    {
+      "from": "t_pause_normal_video",
+      "to": "p_video_paused"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_resume_normal_video"
+    },
+    {
+      "from": "t_resume_normal_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_enter_fs_from_normal_playing"
+    },
+    {
+      "from": "t_enter_fs_from_normal_playing",
+      "to": "p_video_fs_playing"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_enter_fs_from_normal_paused"
+    },
+    {
+      "from": "t_enter_fs_from_normal_paused",
+      "to": "p_video_fs_paused"
+    },
+    {
+      "from": "p_video_fs_playing",
+      "to": "t_exit_fs_to_normal_playing"
+    },
+    {
+      "from": "t_exit_fs_to_normal_playing",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_fs_paused",
+      "to": "t_exit_fs_to_normal_paused"
+    },
+    {
+      "from": "t_exit_fs_to_normal_paused",
+      "to": "p_video_paused"
+    },
+    {
+      "from": "p_video_fs_playing",
+      "to": "t_pause_fs_video"
+    },
+    {
+      "from": "t_pause_fs_video",
+      "to": "p_video_fs_paused"
+    },
+    {
+      "from": "p_video_fs_paused",
+      "to": "t_resume_fs_video"
+    },
+    {
+      "from": "t_resume_fs_video",
+      "to": "p_video_fs_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_video_ends_normal"
+    },
+    {
+      "from": "t_video_ends_normal",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_fs_playing",
+      "to": "t_video_ends_fs"
+    },
+    {
+      "from": "t_video_ends_fs",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_back_to_menu_v_play"
+    },
+    {
+      "from": "t_back_to_menu_v_play",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_back_to_menu_v_pause"
+    },
+    {
+      "from": "t_back_to_menu_v_pause",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_fs_playing",
+      "to": "t_back_to_menu_v_fs_play"
+    },
+    {
+      "from": "t_back_to_menu_v_fs_play",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_fs_paused",
+      "to": "t_back_to_menu_v_fs_pause"
+    },
+    {
+      "from": "t_back_to_menu_v_fs_pause",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_audio"
+    },
+    {
+      "from": "t_select_audio",
+      "to": "p_audio_playing"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_pause_audio"
+    },
+    {
+      "from": "t_pause_audio",
+      "to": "p_audio_paused"
+    },
+    {
+      "from": "p_audio_paused",
+      "to": "t_resume_audio"
+    },
+    {
+      "from": "t_resume_audio",
+      "to": "p_audio_playing"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_audio_ends"
+    },
+    {
+      "from": "t_audio_ends",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_back_to_menu_a_play"
+    },
+    {
+      "from": "t_back_to_menu_a_play",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_audio_paused",
+      "to": "t_back_to_menu_a_pause"
+    },
+    {
+      "from": "t_back_to_menu_a_pause",
+      "to": "p_main_menu"
+    }
+  ],
+  "initial": {
+    "p_main_menu": 1
+  }
+}

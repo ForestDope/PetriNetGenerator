@@ -1,0 +1,279 @@
+{
+  "places": {
+    "p_main_menu": "Main Menu",
+    "p_story_active": "Story Pages Active",
+    "p_narration_idle": "Narration System Idle",
+    "p_narration_playing": "Narration Playing",
+    "p_narration_paused": "Narration Paused",
+    "p_gallery_active": "Gallery Images Active",
+    "p_music_idle": "Music System Idle",
+    "p_music_playing": "Music Playing",
+    "p_music_paused": "Music Paused"
+  },
+  "transitions": {
+    "t_select_story": "Select Story",
+    "t_select_gallery": "Select Gallery",
+    "t_next_story_page": "Next Story Page",
+    "t_prev_story_page": "Previous Story Page",
+    "t_start_narration": "Start Narration",
+    "t_pause_narration": "Pause Narration",
+    "t_resume_narration": "Resume Narration",
+    "t_stop_narration": "Stop Narration",
+    "t_story_ends_idle_narration": "Story Ends (Narration Idle)",
+    "t_story_ends_playing_narration": "Story Ends (Narration Playing)",
+    "t_story_ends_paused_narration": "Story Ends (Narration Paused)",
+    "t_exit_story_manual_idle_narration": "Manual Exit Story (Narration Idle)",
+    "t_exit_story_manual_playing_narration": "Manual Exit Story (Narration Playing)",
+    "t_exit_story_manual_paused_narration": "Manual Exit Story (Narration Paused)",
+    "t_next_gallery_image": "Next Gallery Image",
+    "t_prev_gallery_image": "Previous Gallery Image",
+    "t_play_music": "Play Music",
+    "t_pause_music": "Pause Music",
+    "t_resume_music": "Resume Music",
+    "t_stop_music": "Stop Music",
+    "t_exit_gallery_manual_idle_music": "Manual Exit Gallery (Music Idle)",
+    "t_exit_gallery_manual_playing_music": "Manual Exit Gallery (Music Playing)",
+    "t_exit_gallery_manual_paused_music": "Manual Exit Gallery (Music Paused)"
+  },
+  "arcs": [
+    {
+      "from": "p_main_menu",
+      "to": "t_select_story"
+    },
+    {
+      "from": "t_select_story",
+      "to": "p_story_active"
+    },
+    {
+      "from": "t_select_story",
+      "to": "p_narration_idle"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_gallery"
+    },
+    {
+      "from": "t_select_gallery",
+      "to": "p_gallery_active"
+    },
+    {
+      "from": "t_select_gallery",
+      "to": "p_music_idle"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_next_story_page"
+    },
+    {
+      "from": "t_next_story_page",
+      "to": "p_story_active"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_prev_story_page"
+    },
+    {
+      "from": "t_prev_story_page",
+      "to": "p_story_active"
+    },
+    {
+      "from": "p_narration_idle",
+      "to": "t_start_narration"
+    },
+    {
+      "from": "t_start_narration",
+      "to": "p_narration_playing"
+    },
+    {
+      "from": "p_narration_playing",
+      "to": "t_pause_narration"
+    },
+    {
+      "from": "t_pause_narration",
+      "to": "p_narration_paused"
+    },
+    {
+      "from": "p_narration_paused",
+      "to": "t_resume_narration"
+    },
+    {
+      "from": "t_resume_narration",
+      "to": "p_narration_playing"
+    },
+    {
+      "from": "p_narration_playing",
+      "to": "t_stop_narration"
+    },
+    {
+      "from": "p_narration_paused",
+      "to": "t_stop_narration"
+    },
+    {
+      "from": "t_stop_narration",
+      "to": "p_narration_idle"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_story_ends_idle_narration"
+    },
+    {
+      "from": "p_narration_idle",
+      "to": "t_story_ends_idle_narration"
+    },
+    {
+      "from": "t_story_ends_idle_narration",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_story_ends_playing_narration"
+    },
+    {
+      "from": "p_narration_playing",
+      "to": "t_story_ends_playing_narration"
+    },
+    {
+      "from": "t_story_ends_playing_narration",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_story_ends_paused_narration"
+    },
+    {
+      "from": "p_narration_paused",
+      "to": "t_story_ends_paused_narration"
+    },
+    {
+      "from": "t_story_ends_paused_narration",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_exit_story_manual_idle_narration"
+    },
+    {
+      "from": "p_narration_idle",
+      "to": "t_exit_story_manual_idle_narration"
+    },
+    {
+      "from": "t_exit_story_manual_idle_narration",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_exit_story_manual_playing_narration"
+    },
+    {
+      "from": "p_narration_playing",
+      "to": "t_exit_story_manual_playing_narration"
+    },
+    {
+      "from": "t_exit_story_manual_playing_narration",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_story_active",
+      "to": "t_exit_story_manual_paused_narration"
+    },
+    {
+      "from": "p_narration_paused",
+      "to": "t_exit_story_manual_paused_narration"
+    },
+    {
+      "from": "t_exit_story_manual_paused_narration",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_gallery_active",
+      "to": "t_next_gallery_image"
+    },
+    {
+      "from": "t_next_gallery_image",
+      "to": "p_gallery_active"
+    },
+    {
+      "from": "p_gallery_active",
+      "to": "t_prev_gallery_image"
+    },
+    {
+      "from": "t_prev_gallery_image",
+      "to": "p_gallery_active"
+    },
+    {
+      "from": "p_music_idle",
+      "to": "t_play_music"
+    },
+    {
+      "from": "t_play_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_pause_music"
+    },
+    {
+      "from": "t_pause_music",
+      "to": "p_music_paused"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_resume_music"
+    },
+    {
+      "from": "t_resume_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_stop_music"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_stop_music"
+    },
+    {
+      "from": "t_stop_music",
+      "to": "p_music_idle"
+    },
+    {
+      "from": "p_gallery_active",
+      "to": "t_exit_gallery_manual_idle_music"
+    },
+    {
+      "from": "p_music_idle",
+      "to": "t_exit_gallery_manual_idle_music"
+    },
+    {
+      "from": "t_exit_gallery_manual_idle_music",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_gallery_active",
+      "to": "t_exit_gallery_manual_playing_music"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_exit_gallery_manual_playing_music"
+    },
+    {
+      "from": "t_exit_gallery_manual_playing_music",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_gallery_active",
+      "to": "t_exit_gallery_manual_paused_music"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_exit_gallery_manual_paused_music"
+    },
+    {
+      "from": "t_exit_gallery_manual_paused_music",
+      "to": "p_main_menu"
+    }
+  ],
+  "initial": {
+    "p_main_menu": 1
+  }
+}

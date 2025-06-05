@@ -1,0 +1,97 @@
+{
+  "places": {
+    "p_main_gallery": "Main Gallery View",
+    "p_photo_viewing": "Photo Displayed Full Screen",
+    "p_preload_trigger": "Pre-load Request",
+    "p_preloading_in_progress": "Pre-loading In Progress",
+    "p_next_photo_preloaded": "Next Photo Pre-loaded",
+    "p_zoomed_in": "Photo is Zoomed In"
+  },
+  "transitions": {
+    "t_select_photo": "Select Photo",
+    "t_initiate_preload": "Initiate Pre-load",
+    "t_preload_finished": "Pre-load Finished",
+    "t_zoom_in": "Zoom In",
+    "t_zoom_out": "Zoom Out",
+    "t_navigate_to_next": "Navigate to Next Photo",
+    "t_navigate_to_last_then_exit": "Navigate to Last Photo & Exit",
+    "t_return_to_main_gallery": "Return to Main Gallery"
+  },
+  "arcs": [
+    {
+      "from": "p_main_gallery",
+      "to": "t_select_photo"
+    },
+    {
+      "from": "t_select_photo",
+      "to": "p_photo_viewing"
+    },
+    {
+      "from": "t_select_photo",
+      "to": "p_preload_trigger"
+    },
+    {
+      "from": "p_preload_trigger",
+      "to": "t_initiate_preload"
+    },
+    {
+      "from": "t_initiate_preload",
+      "to": "p_preloading_in_progress"
+    },
+    {
+      "from": "p_preloading_in_progress",
+      "to": "t_preload_finished"
+    },
+    {
+      "from": "t_preload_finished",
+      "to": "p_next_photo_preloaded"
+    },
+    {
+      "from": "p_photo_viewing",
+      "to": "t_zoom_in"
+    },
+    {
+      "from": "t_zoom_in",
+      "to": "p_zoomed_in"
+    },
+    {
+      "from": "p_zoomed_in",
+      "to": "t_zoom_out"
+    },
+    {
+      "from": "t_zoom_out",
+      "to": "p_photo_viewing"
+    },
+    {
+      "from": "p_photo_viewing",
+      "to": "t_navigate_to_next"
+    },
+    {
+      "from": "t_navigate_to_next",
+      "to": "p_photo_viewing"
+    },
+    {
+      "from": "t_navigate_to_next",
+      "to": "p_preload_trigger"
+    },
+    {
+      "from": "p_photo_viewing",
+      "to": "t_navigate_to_last_then_exit"
+    },
+    {
+      "from": "t_navigate_to_last_then_exit",
+      "to": "p_main_gallery"
+    },
+    {
+      "from": "p_photo_viewing",
+      "to": "t_return_to_main_gallery"
+    },
+    {
+      "from": "t_return_to_main_gallery",
+      "to": "p_main_gallery"
+    }
+  ],
+  "initial": {
+    "p_main_gallery": 1
+  }
+}

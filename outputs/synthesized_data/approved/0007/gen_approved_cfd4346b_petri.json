@@ -1,0 +1,122 @@
+{
+  "places": {
+    "p_idle": "Application Idle",
+    "p_connecting": "Connecting to Call",
+    "p_in_call_base": "User in Call (Main State)",
+    "p_mic_active": "Microphone Active",
+    "p_mic_muted": "Microphone Muted",
+    "p_screen_not_sharing": "Screen Not Shared",
+    "p_screen_sharing": "Screen Being Shared",
+    "p_call_ended": "Call Ended"
+  },
+  "transitions": {
+    "t_initiate_call": "Initiate Call",
+    "t_connection_established": "Connection Established",
+    "t_mute_mic": "Mute Microphone",
+    "t_unmute_mic": "Unmute Microphone",
+    "t_start_screen_share": "Start Screen Share",
+    "t_stop_screen_share": "Stop Screen Share",
+    "t_end_call": "End Call"
+  },
+  "arcs": [
+    {
+      "from": "p_idle",
+      "to": "t_initiate_call"
+    },
+    {
+      "from": "t_initiate_call",
+      "to": "p_connecting"
+    },
+    {
+      "from": "p_connecting",
+      "to": "t_connection_established"
+    },
+    {
+      "from": "t_connection_established",
+      "to": "p_in_call_base"
+    },
+    {
+      "from": "t_connection_established",
+      "to": "p_mic_active"
+    },
+    {
+      "from": "t_connection_established",
+      "to": "p_screen_not_sharing"
+    },
+    {
+      "from": "p_in_call_base",
+      "to": "t_mute_mic"
+    },
+    {
+      "from": "p_mic_active",
+      "to": "t_mute_mic"
+    },
+    {
+      "from": "t_mute_mic",
+      "to": "p_in_call_base"
+    },
+    {
+      "from": "t_mute_mic",
+      "to": "p_mic_muted"
+    },
+    {
+      "from": "p_in_call_base",
+      "to": "t_unmute_mic"
+    },
+    {
+      "from": "p_mic_muted",
+      "to": "t_unmute_mic"
+    },
+    {
+      "from": "t_unmute_mic",
+      "to": "p_in_call_base"
+    },
+    {
+      "from": "t_unmute_mic",
+      "to": "p_mic_active"
+    },
+    {
+      "from": "p_in_call_base",
+      "to": "t_start_screen_share"
+    },
+    {
+      "from": "p_screen_not_sharing",
+      "to": "t_start_screen_share"
+    },
+    {
+      "from": "t_start_screen_share",
+      "to": "p_in_call_base"
+    },
+    {
+      "from": "t_start_screen_share",
+      "to": "p_screen_sharing"
+    },
+    {
+      "from": "p_in_call_base",
+      "to": "t_stop_screen_share"
+    },
+    {
+      "from": "p_screen_sharing",
+      "to": "t_stop_screen_share"
+    },
+    {
+      "from": "t_stop_screen_share",
+      "to": "p_in_call_base"
+    },
+    {
+      "from": "t_stop_screen_share",
+      "to": "p_screen_not_sharing"
+    },
+    {
+      "from": "p_in_call_base",
+      "to": "t_end_call"
+    },
+    {
+      "from": "t_end_call",
+      "to": "p_call_ended"
+    }
+  ],
+  "initial": {
+    "p_idle": 1
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "places": {
+    "p_main_gallery": "Main Gallery View",
+    "p_image_viewing": "Full-screen Image Viewing",
+    "p_sharing_process": "Sharing Process Active",
+    "p_settings_menu": "Settings Menu Open",
+    "p_session_ended": "Session Ended"
+  },
+  "transitions": {
+    "t_select_image": "Select Image from Gallery",
+    "t_exit_image_view": "Exit Full-screen View",
+    "t_next_image": "View Next Image",
+    "t_prev_image": "View Previous Image",
+    "t_start_share": "Start Sharing Image",
+    "t_complete_share": "Complete Sharing",
+    "t_open_settings": "Open Settings Menu",
+    "t_save_settings": "Save Settings",
+    "t_cancel_settings": "Cancel Settings",
+    "t_exit_app": "Exit Application"
+  },
+  "arcs": [
+    {
+      "from": "p_main_gallery",
+      "to": "t_select_image"
+    },
+    {
+      "from": "t_select_image",
+      "to": "p_image_viewing"
+    },
+    {
+      "from": "p_image_viewing",
+      "to": "t_exit_image_view"
+    },
+    {
+      "from": "t_exit_image_view",
+      "to": "p_main_gallery"
+    },
+    {
+      "from": "p_image_viewing",
+      "to": "t_next_image"
+    },
+    {
+      "from": "t_next_image",
+      "to": "p_image_viewing"
+    },
+    {
+      "from": "p_image_viewing",
+      "to": "t_prev_image"
+    },
+    {
+      "from": "t_prev_image",
+      "to": "p_image_viewing"
+    },
+    {
+      "from": "p_image_viewing",
+      "to": "t_start_share"
+    },
+    {
+      "from": "t_start_share",
+      "to": "p_sharing_process"
+    },
+    {
+      "from": "p_sharing_process",
+      "to": "t_complete_share"
+    },
+    {
+      "from": "t_complete_share",
+      "to": "p_image_viewing"
+    },
+    {
+      "from": "p_main_gallery",
+      "to": "t_open_settings"
+    },
+    {
+      "from": "t_open_settings",
+      "to": "p_settings_menu"
+    },
+    {
+      "from": "p_settings_menu",
+      "to": "t_save_settings"
+    },
+    {
+      "from": "t_save_settings",
+      "to": "p_main_gallery"
+    },
+    {
+      "from": "p_settings_menu",
+      "to": "t_cancel_settings"
+    },
+    {
+      "from": "t_cancel_settings",
+      "to": "p_main_gallery"
+    },
+    {
+      "from": "p_main_gallery",
+      "to": "t_exit_app"
+    },
+    {
+      "from": "t_exit_app",
+      "to": "p_session_ended"
+    }
+  ],
+  "initial": {
+    "p_main_gallery": 1
+  }
+}

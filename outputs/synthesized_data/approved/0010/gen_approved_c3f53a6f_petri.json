@@ -1,0 +1,135 @@
+{
+  "places": {
+    "p_idle": "System Idle",
+    "p_main_menu": "Main Menu Displayed",
+    "p_music_player_active": "Music Player Active",
+    "p_music_playing": "Music Playing",
+    "p_music_paused": "Music Paused",
+    "p_photo_viewer_active": "Photo Viewer Active",
+    "p_displaying_photo": "Photo Displayed"
+  },
+  "transitions": {
+    "t_wake_up": "Wake Up System",
+    "t_select_music": "Select Music Application",
+    "t_start_music": "Start Music Playback",
+    "t_pause_music": "Pause Music",
+    "t_resume_music": "Resume Music",
+    "t_stop_music": "Stop Music Playback",
+    "t_music_finishes": "Music Track Finishes",
+    "t_select_photos": "Select Photo Application",
+    "t_display_first_photo": "Display First Photo",
+    "t_next_photo": "View Next Photo",
+    "t_exit_viewer": "Exit Photo Viewer",
+    "t_no_more_photos": "No More Photos in Album",
+    "t_go_to_sleep": "Put System to Sleep"
+  },
+  "arcs": [
+    {
+      "from": "p_idle",
+      "to": "t_wake_up"
+    },
+    {
+      "from": "t_wake_up",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_music"
+    },
+    {
+      "from": "t_select_music",
+      "to": "p_music_player_active"
+    },
+    {
+      "from": "p_music_player_active",
+      "to": "t_start_music"
+    },
+    {
+      "from": "t_start_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_pause_music"
+    },
+    {
+      "from": "t_pause_music",
+      "to": "p_music_paused"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_resume_music"
+    },
+    {
+      "from": "t_resume_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_stop_music"
+    },
+    {
+      "from": "t_stop_music",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_music_finishes"
+    },
+    {
+      "from": "t_music_finishes",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_photos"
+    },
+    {
+      "from": "t_select_photos",
+      "to": "p_photo_viewer_active"
+    },
+    {
+      "from": "p_photo_viewer_active",
+      "to": "t_display_first_photo"
+    },
+    {
+      "from": "t_display_first_photo",
+      "to": "p_displaying_photo"
+    },
+    {
+      "from": "p_displaying_photo",
+      "to": "t_next_photo"
+    },
+    {
+      "from": "t_next_photo",
+      "to": "p_displaying_photo"
+    },
+    {
+      "from": "p_displaying_photo",
+      "to": "t_exit_viewer"
+    },
+    {
+      "from": "t_exit_viewer",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_displaying_photo",
+      "to": "t_no_more_photos"
+    },
+    {
+      "from": "t_no_more_photos",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_go_to_sleep"
+    },
+    {
+      "from": "t_go_to_sleep",
+      "to": "p_idle"
+    }
+  ],
+  "initial": {
+    "p_idle": 1
+  }
+}

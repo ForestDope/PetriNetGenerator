@@ -1,0 +1,129 @@
+{
+  "places": {
+    "p_system_idle": "System Idle",
+    "p_main_menu_browsing": "Main Menu / Browsing Categories",
+    "p_content_selected_options": "Content Item Options Displayed",
+    "p_content_playing": "Content Playing",
+    "p_content_paused": "Content Paused",
+    "p_content_info_displayed": "Content Info Displayed"
+  },
+  "transitions": {
+    "t_power_on_system": "Power On System",
+    "t_select_content_category": "Select Content Category (e.g., Movies)",
+    "t_start_playback": "Start Playback",
+    "t_view_info": "View Content Info",
+    "t_pause_playback": "Pause Playback",
+    "t_resume_playback": "Resume Playback",
+    "t_user_stops_playback": "User Stops Playback",
+    "t_content_finishes_naturally": "Content Finishes Naturally",
+    "t_exit_info_to_options": "Exit Info to Options",
+    "t_start_play_from_info": "Start Play from Info Screen",
+    "t_back_to_main_menu": "Back to Main Menu",
+    "t_power_off_system": "Power Off System"
+  },
+  "arcs": [
+    {
+      "from": "p_system_idle",
+      "to": "t_power_on_system"
+    },
+    {
+      "from": "t_power_on_system",
+      "to": "p_main_menu_browsing"
+    },
+    {
+      "from": "p_main_menu_browsing",
+      "to": "t_select_content_category"
+    },
+    {
+      "from": "t_select_content_category",
+      "to": "p_content_selected_options"
+    },
+    {
+      "from": "p_main_menu_browsing",
+      "to": "t_power_off_system"
+    },
+    {
+      "from": "t_power_off_system",
+      "to": "p_system_idle"
+    },
+    {
+      "from": "p_content_selected_options",
+      "to": "t_start_playback"
+    },
+    {
+      "from": "t_start_playback",
+      "to": "p_content_playing"
+    },
+    {
+      "from": "p_content_selected_options",
+      "to": "t_view_info"
+    },
+    {
+      "from": "t_view_info",
+      "to": "p_content_info_displayed"
+    },
+    {
+      "from": "p_content_selected_options",
+      "to": "t_back_to_main_menu"
+    },
+    {
+      "from": "t_back_to_main_menu",
+      "to": "p_main_menu_browsing"
+    },
+    {
+      "from": "p_content_playing",
+      "to": "t_pause_playback"
+    },
+    {
+      "from": "t_pause_playback",
+      "to": "p_content_paused"
+    },
+    {
+      "from": "p_content_playing",
+      "to": "t_user_stops_playback"
+    },
+    {
+      "from": "p_content_paused",
+      "to": "t_user_stops_playback"
+    },
+    {
+      "from": "t_user_stops_playback",
+      "to": "p_main_menu_browsing"
+    },
+    {
+      "from": "p_content_playing",
+      "to": "t_content_finishes_naturally"
+    },
+    {
+      "from": "t_content_finishes_naturally",
+      "to": "p_main_menu_browsing"
+    },
+    {
+      "from": "p_content_paused",
+      "to": "t_resume_playback"
+    },
+    {
+      "from": "t_resume_playback",
+      "to": "p_content_playing"
+    },
+    {
+      "from": "p_content_info_displayed",
+      "to": "t_exit_info_to_options"
+    },
+    {
+      "from": "t_exit_info_to_options",
+      "to": "p_content_selected_options"
+    },
+    {
+      "from": "p_content_info_displayed",
+      "to": "t_start_play_from_info"
+    },
+    {
+      "from": "t_start_play_from_info",
+      "to": "p_content_playing"
+    }
+  ],
+  "initial": {
+    "p_system_idle": 1
+  }
+}

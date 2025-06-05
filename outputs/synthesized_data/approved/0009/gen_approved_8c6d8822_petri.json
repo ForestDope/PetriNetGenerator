@@ -1,0 +1,87 @@
+{
+  "places": {
+    "p_welcome": "Welcome Screen",
+    "p_editing": "Image Loaded & Editing Mode",
+    "p_image_saved": "Image Saved",
+    "p_app_closed": "Application Closed"
+  },
+  "transitions": {
+    "t_load_image": "Load Image",
+    "t_exit_from_welcome": "Exit from Welcome",
+    "t_apply_filter": "Apply Filter",
+    "t_adjust_brightness": "Adjust Brightness",
+    "t_save_image": "Save Image",
+    "t_load_new_image": "Load New Image (after save)",
+    "t_return_to_welcome": "Return to Welcome (after save)",
+    "t_exit_from_saved": "Exit from Saved State"
+  },
+  "arcs": [
+    {
+      "from": "p_welcome",
+      "to": "t_load_image"
+    },
+    {
+      "from": "t_load_image",
+      "to": "p_editing"
+    },
+    {
+      "from": "p_welcome",
+      "to": "t_exit_from_welcome"
+    },
+    {
+      "from": "t_exit_from_welcome",
+      "to": "p_app_closed"
+    },
+    {
+      "from": "p_editing",
+      "to": "t_apply_filter"
+    },
+    {
+      "from": "t_apply_filter",
+      "to": "p_editing"
+    },
+    {
+      "from": "p_editing",
+      "to": "t_adjust_brightness"
+    },
+    {
+      "from": "t_adjust_brightness",
+      "to": "p_editing"
+    },
+    {
+      "from": "p_editing",
+      "to": "t_save_image"
+    },
+    {
+      "from": "t_save_image",
+      "to": "p_image_saved"
+    },
+    {
+      "from": "p_image_saved",
+      "to": "t_load_new_image"
+    },
+    {
+      "from": "t_load_new_image",
+      "to": "p_editing"
+    },
+    {
+      "from": "p_image_saved",
+      "to": "t_return_to_welcome"
+    },
+    {
+      "from": "t_return_to_welcome",
+      "to": "p_welcome"
+    },
+    {
+      "from": "p_image_saved",
+      "to": "t_exit_from_saved"
+    },
+    {
+      "from": "t_exit_from_saved",
+      "to": "p_app_closed"
+    }
+  ],
+  "initial": {
+    "p_welcome": 1
+  }
+}

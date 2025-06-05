@@ -1,0 +1,179 @@
+{
+  "places": {
+    "p_player_closed": "Player Closed",
+    "p_player_open_idle": "Player Open, Awaiting Video Selection",
+    "p_video_selected_ready_to_play": "Video Selected, Ready to Play",
+    "p_video_playing_normal": "Video Playing (Normal View)",
+    "p_video_paused_normal": "Video Paused (Normal View)",
+    "p_video_playing_fullscreen": "Video Playing (Full Screen)",
+    "p_video_paused_fullscreen": "Video Paused (Full Screen)",
+    "p_video_ended": "Video Playback Ended"
+  },
+  "transitions": {
+    "t_open_player": "Open Player Application",
+    "t_close_player": "Close Player Application",
+    "t_select_video": "Select a Video",
+    "t_back_from_selection": "Back to Video List / Cancel Selection",
+    "t_start_play": "Start Playback",
+    "t_pause_normal": "Pause Video (Normal View)",
+    "t_resume_normal": "Resume Video (Normal View)",
+    "t_go_fullscreen": "Enter Full Screen",
+    "t_exit_fullscreen": "Exit Full Screen (from Playing)",
+    "t_pause_fullscreen": "Pause Video (Full Screen)",
+    "t_resume_fullscreen": "Resume Video (Full Screen)",
+    "t_exit_fullscreen_paused": "Exit Full Screen (from Paused)",
+    "t_stop_playback": "Stop Playback",
+    "t_video_finishes": "Video Finishes Naturally",
+    "t_replay_video": "Replay Current Video",
+    "t_return_to_menu_after_end": "Return to Menu after Playback"
+  },
+  "arcs": [
+    {
+      "from": "p_player_closed",
+      "to": "t_open_player"
+    },
+    {
+      "from": "t_open_player",
+      "to": "p_player_open_idle"
+    },
+    {
+      "from": "p_player_open_idle",
+      "to": "t_select_video"
+    },
+    {
+      "from": "t_select_video",
+      "to": "p_video_selected_ready_to_play"
+    },
+    {
+      "from": "p_video_selected_ready_to_play",
+      "to": "t_back_from_selection"
+    },
+    {
+      "from": "t_back_from_selection",
+      "to": "p_player_open_idle"
+    },
+    {
+      "from": "p_player_open_idle",
+      "to": "t_close_player"
+    },
+    {
+      "from": "t_close_player",
+      "to": "p_player_closed"
+    },
+    {
+      "from": "p_video_selected_ready_to_play",
+      "to": "t_start_play"
+    },
+    {
+      "from": "t_start_play",
+      "to": "p_video_playing_normal"
+    },
+    {
+      "from": "p_video_playing_normal",
+      "to": "t_pause_normal"
+    },
+    {
+      "from": "t_pause_normal",
+      "to": "p_video_paused_normal"
+    },
+    {
+      "from": "p_video_paused_normal",
+      "to": "t_resume_normal"
+    },
+    {
+      "from": "t_resume_normal",
+      "to": "p_video_playing_normal"
+    },
+    {
+      "from": "p_video_playing_normal",
+      "to": "t_go_fullscreen"
+    },
+    {
+      "from": "t_go_fullscreen",
+      "to": "p_video_playing_fullscreen"
+    },
+    {
+      "from": "p_video_playing_fullscreen",
+      "to": "t_exit_fullscreen"
+    },
+    {
+      "from": "t_exit_fullscreen",
+      "to": "p_video_playing_normal"
+    },
+    {
+      "from": "p_video_playing_fullscreen",
+      "to": "t_pause_fullscreen"
+    },
+    {
+      "from": "t_pause_fullscreen",
+      "to": "p_video_paused_fullscreen"
+    },
+    {
+      "from": "p_video_paused_fullscreen",
+      "to": "t_resume_fullscreen"
+    },
+    {
+      "from": "t_resume_fullscreen",
+      "to": "p_video_playing_fullscreen"
+    },
+    {
+      "from": "p_video_paused_fullscreen",
+      "to": "t_exit_fullscreen_paused"
+    },
+    {
+      "from": "t_exit_fullscreen_paused",
+      "to": "p_video_paused_normal"
+    },
+    {
+      "from": "p_video_playing_normal",
+      "to": "t_stop_playback"
+    },
+    {
+      "from": "p_video_paused_normal",
+      "to": "t_stop_playback"
+    },
+    {
+      "from": "p_video_playing_fullscreen",
+      "to": "t_stop_playback"
+    },
+    {
+      "from": "p_video_paused_fullscreen",
+      "to": "t_stop_playback"
+    },
+    {
+      "from": "t_stop_playback",
+      "to": "p_video_ended"
+    },
+    {
+      "from": "p_video_playing_normal",
+      "to": "t_video_finishes"
+    },
+    {
+      "from": "p_video_playing_fullscreen",
+      "to": "t_video_finishes"
+    },
+    {
+      "from": "t_video_finishes",
+      "to": "p_video_ended"
+    },
+    {
+      "from": "p_video_ended",
+      "to": "t_replay_video"
+    },
+    {
+      "from": "t_replay_video",
+      "to": "p_video_selected_ready_to_play"
+    },
+    {
+      "from": "p_video_ended",
+      "to": "t_return_to_menu_after_end"
+    },
+    {
+      "from": "t_return_to_menu_after_end",
+      "to": "p_player_open_idle"
+    }
+  ],
+  "initial": {
+    "p_player_closed": 1
+  }
+}

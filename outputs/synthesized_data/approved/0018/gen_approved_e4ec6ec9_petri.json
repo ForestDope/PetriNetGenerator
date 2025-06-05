@@ -1,0 +1,114 @@
+{
+  "places": {
+    "p_main_gallery": "Main Gallery View",
+    "p_artwork_details_default_zoom": "Artwork Details (Default Zoom)",
+    "p_artwork_details_zoomed_in": "Artwork Details (Zoomed In)",
+    "p_about_us_displayed": "About Us Page Displayed"
+  },
+  "transitions": {
+    "t_select_artwork": "Select Artwork from Main",
+    "t_navigate_to_about": "Navigate to About Us",
+    "t_zoom_in": "Zoom In on Artwork",
+    "t_zoom_out": "Zoom Out on Artwork",
+    "t_return_to_main_from_art_default": "Return to Main from Art (Default Zoom)",
+    "t_return_to_main_from_art_zoomed": "Return to Main from Art (Zoomed In)",
+    "t_return_to_main_from_about": "Return to Main from About Us",
+    "t_view_next_artwork_from_default": "View Next Artwork (from Default Zoom)",
+    "t_view_next_artwork_from_zoomed": "View Next Artwork (from Zoomed In)",
+    "t_view_previous_artwork_from_default": "View Previous Artwork (from Default Zoom)",
+    "t_view_previous_artwork_from_zoomed": "View Previous Artwork (from Zoomed In)"
+  },
+  "arcs": [
+    {
+      "from": "p_main_gallery",
+      "to": "t_select_artwork"
+    },
+    {
+      "from": "t_select_artwork",
+      "to": "p_artwork_details_default_zoom"
+    },
+    {
+      "from": "p_main_gallery",
+      "to": "t_navigate_to_about"
+    },
+    {
+      "from": "t_navigate_to_about",
+      "to": "p_about_us_displayed"
+    },
+    {
+      "from": "p_artwork_details_default_zoom",
+      "to": "t_zoom_in"
+    },
+    {
+      "from": "t_zoom_in",
+      "to": "p_artwork_details_zoomed_in"
+    },
+    {
+      "from": "p_artwork_details_zoomed_in",
+      "to": "t_zoom_out"
+    },
+    {
+      "from": "t_zoom_out",
+      "to": "p_artwork_details_default_zoom"
+    },
+    {
+      "from": "p_artwork_details_default_zoom",
+      "to": "t_return_to_main_from_art_default"
+    },
+    {
+      "from": "t_return_to_main_from_art_default",
+      "to": "p_main_gallery"
+    },
+    {
+      "from": "p_artwork_details_zoomed_in",
+      "to": "t_return_to_main_from_art_zoomed"
+    },
+    {
+      "from": "t_return_to_main_from_art_zoomed",
+      "to": "p_main_gallery"
+    },
+    {
+      "from": "p_artwork_details_default_zoom",
+      "to": "t_view_next_artwork_from_default"
+    },
+    {
+      "from": "t_view_next_artwork_from_default",
+      "to": "p_artwork_details_default_zoom"
+    },
+    {
+      "from": "p_artwork_details_zoomed_in",
+      "to": "t_view_next_artwork_from_zoomed"
+    },
+    {
+      "from": "t_view_next_artwork_from_zoomed",
+      "to": "p_artwork_details_default_zoom"
+    },
+    {
+      "from": "p_artwork_details_default_zoom",
+      "to": "t_view_previous_artwork_from_default"
+    },
+    {
+      "from": "t_view_previous_artwork_from_default",
+      "to": "p_artwork_details_default_zoom"
+    },
+    {
+      "from": "p_artwork_details_zoomed_in",
+      "to": "t_view_previous_artwork_from_zoomed"
+    },
+    {
+      "from": "t_view_previous_artwork_from_zoomed",
+      "to": "p_artwork_details_default_zoom"
+    },
+    {
+      "from": "p_about_us_displayed",
+      "to": "t_return_to_main_from_about"
+    },
+    {
+      "from": "t_return_to_main_from_about",
+      "to": "p_main_gallery"
+    }
+  ],
+  "initial": {
+    "p_main_gallery": 1
+  }
+}

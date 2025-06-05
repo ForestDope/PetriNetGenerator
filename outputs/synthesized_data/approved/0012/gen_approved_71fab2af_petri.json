@@ -1,0 +1,245 @@
+{
+  "places": {
+    "p_selection_screen": "Main Selection Screen",
+    "p_video_playing": "Video Playing",
+    "p_video_paused": "Video Paused",
+    "p_video_fullscreen": "Video Fullscreen",
+    "p_audio_playing_no_lyrics": "Audio Playing (No Lyrics)",
+    "p_audio_playing_with_lyrics": "Audio Playing (With Lyrics)",
+    "p_audio_paused_no_lyrics": "Audio Paused (No Lyrics)",
+    "p_audio_paused_with_lyrics": "Audio Paused (With Lyrics)",
+    "p_app_exited": "Application Exited"
+  },
+  "transitions": {
+    "t_select_video": "Select Video",
+    "t_select_audio": "Select Audio",
+    "t_exit_app": "Exit Application",
+    "t_pause_video_from_playing": "Pause Video (from Playing)",
+    "t_pause_video_from_fullscreen": "Pause Video (from Fullscreen)",
+    "t_resume_video": "Resume Video",
+    "t_go_fullscreen": "Go Fullscreen",
+    "t_exit_fullscreen": "Exit Fullscreen",
+    "t_stop_video_playing": "Stop Video (from Playing)",
+    "t_stop_video_paused": "Stop Video (from Paused)",
+    "t_stop_video_fullscreen": "Stop Video (from Fullscreen)",
+    "t_video_ends_playing": "Video Ends (from Playing)",
+    "t_video_ends_fullscreen": "Video Ends (from Fullscreen)",
+    "t_pause_audio_nl": "Pause Audio (No Lyrics)",
+    "t_pause_audio_wl": "Pause Audio (With Lyrics)",
+    "t_resume_audio_nl": "Resume Audio (to No Lyrics)",
+    "t_resume_audio_wl": "Resume Audio (to With Lyrics)",
+    "t_show_lyrics": "Show Lyrics",
+    "t_hide_lyrics": "Hide Lyrics",
+    "t_stop_audio_nl_playing": "Stop Audio (No Lyrics, Playing)",
+    "t_stop_audio_wl_playing": "Stop Audio (With Lyrics, Playing)",
+    "t_stop_audio_nl_paused": "Stop Audio (No Lyrics, Paused)",
+    "t_stop_audio_wl_paused": "Stop Audio (With Lyrics, Paused)",
+    "t_audio_ends_nl": "Audio Ends (No Lyrics)",
+    "t_audio_ends_wl": "Audio Ends (With Lyrics)"
+  },
+  "arcs": [
+    {
+      "from": "p_selection_screen",
+      "to": "t_select_video"
+    },
+    {
+      "from": "t_select_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_selection_screen",
+      "to": "t_select_audio"
+    },
+    {
+      "from": "t_select_audio",
+      "to": "p_audio_playing_no_lyrics"
+    },
+    {
+      "from": "p_selection_screen",
+      "to": "t_exit_app"
+    },
+    {
+      "from": "t_exit_app",
+      "to": "p_app_exited"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_pause_video_from_playing"
+    },
+    {
+      "from": "t_pause_video_from_playing",
+      "to": "p_video_paused"
+    },
+    {
+      "from": "p_video_fullscreen",
+      "to": "t_pause_video_from_fullscreen"
+    },
+    {
+      "from": "t_pause_video_from_fullscreen",
+      "to": "p_video_paused"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_resume_video"
+    },
+    {
+      "from": "t_resume_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_go_fullscreen"
+    },
+    {
+      "from": "t_go_fullscreen",
+      "to": "p_video_fullscreen"
+    },
+    {
+      "from": "p_video_fullscreen",
+      "to": "t_exit_fullscreen"
+    },
+    {
+      "from": "t_exit_fullscreen",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_stop_video_playing"
+    },
+    {
+      "from": "t_stop_video_playing",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_stop_video_paused"
+    },
+    {
+      "from": "t_stop_video_paused",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_video_fullscreen",
+      "to": "t_stop_video_fullscreen"
+    },
+    {
+      "from": "t_stop_video_fullscreen",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_video_ends_playing"
+    },
+    {
+      "from": "t_video_ends_playing",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_video_fullscreen",
+      "to": "t_video_ends_fullscreen"
+    },
+    {
+      "from": "t_video_ends_fullscreen",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_audio_playing_no_lyrics",
+      "to": "t_pause_audio_nl"
+    },
+    {
+      "from": "t_pause_audio_nl",
+      "to": "p_audio_paused_no_lyrics"
+    },
+    {
+      "from": "p_audio_playing_with_lyrics",
+      "to": "t_pause_audio_wl"
+    },
+    {
+      "from": "t_pause_audio_wl",
+      "to": "p_audio_paused_with_lyrics"
+    },
+    {
+      "from": "p_audio_paused_no_lyrics",
+      "to": "t_resume_audio_nl"
+    },
+    {
+      "from": "t_resume_audio_nl",
+      "to": "p_audio_playing_no_lyrics"
+    },
+    {
+      "from": "p_audio_paused_with_lyrics",
+      "to": "t_resume_audio_wl"
+    },
+    {
+      "from": "t_resume_audio_wl",
+      "to": "p_audio_playing_with_lyrics"
+    },
+    {
+      "from": "p_audio_playing_no_lyrics",
+      "to": "t_show_lyrics"
+    },
+    {
+      "from": "t_show_lyrics",
+      "to": "p_audio_playing_with_lyrics"
+    },
+    {
+      "from": "p_audio_playing_with_lyrics",
+      "to": "t_hide_lyrics"
+    },
+    {
+      "from": "t_hide_lyrics",
+      "to": "p_audio_playing_no_lyrics"
+    },
+    {
+      "from": "p_audio_playing_no_lyrics",
+      "to": "t_stop_audio_nl_playing"
+    },
+    {
+      "from": "t_stop_audio_nl_playing",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_audio_playing_with_lyrics",
+      "to": "t_stop_audio_wl_playing"
+    },
+    {
+      "from": "t_stop_audio_wl_playing",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_audio_paused_no_lyrics",
+      "to": "t_stop_audio_nl_paused"
+    },
+    {
+      "from": "t_stop_audio_nl_paused",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_audio_paused_with_lyrics",
+      "to": "t_stop_audio_wl_paused"
+    },
+    {
+      "from": "t_stop_audio_wl_paused",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_audio_playing_no_lyrics",
+      "to": "t_audio_ends_nl"
+    },
+    {
+      "from": "t_audio_ends_nl",
+      "to": "p_selection_screen"
+    },
+    {
+      "from": "p_audio_playing_with_lyrics",
+      "to": "t_audio_ends_wl"
+    },
+    {
+      "from": "t_audio_ends_wl",
+      "to": "p_selection_screen"
+    }
+  ],
+  "initial": {
+    "p_selection_screen": 1
+  }
+}

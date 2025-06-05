@@ -1,0 +1,7 @@
+A user interacts with a smart home media hub. Starting from an 'Idle' state, the user can 'Wake Up' the system, which then displays the 'Main Menu'. From the 'Main Menu', the user has two primary choices: 'Select Music' or 'Select Photos'.
+
+If 'Select Music', the system enters 'Music Player Active' mode and automatically 'Starts Music Playback'. While music is 'Playing', the user can 'Pause Music' (entering 'Music Paused' state) or 'Stop Music Playback' (returning to the 'Main Menu'). From 'Music Paused', the user can 'Resume Music' (returning to 'Music Playing'). If a music track 'Finishes Normally', the system also returns to the 'Main Menu'.
+
+If 'Select Photos', the system enters 'Photo Viewer Active' mode and 'Displays First Photo'. While a photo is 'Displayed', the user can 'View Next Photo' (remaining in 'Photo Displayed' state for the next image) or 'Exit Photo Viewer' (returning to 'Main Menu'). If there are 'No More Photos in Album', the system automatically returns to the 'Main Menu'.
+
+At any point from the 'Main Menu', the user can choose to 'Put System to Sleep', returning it to the 'Idle' state.

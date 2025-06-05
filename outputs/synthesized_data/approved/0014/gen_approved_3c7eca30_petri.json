@@ -1,0 +1,115 @@
+{
+  "places": {
+    "p_home_screen": "Home Screen Displayed",
+    "p_music_playing": "Music Playing",
+    "p_music_paused": "Music Paused",
+    "p_photo_gallery_active": "Photo Gallery Active",
+    "p_settings_open": "Settings Menu Open"
+  },
+  "transitions": {
+    "t_select_music": "Select Music Player",
+    "t_select_photos": "Select Photo Gallery",
+    "t_select_settings": "Select Settings",
+    "t_pause_music": "Pause Music",
+    "t_resume_music": "Resume Music",
+    "t_stop_music_playing": "Stop Music (from Playing)",
+    "t_stop_music_paused": "Stop Music (from Paused)",
+    "t_next_photo": "View Next Photo",
+    "t_exit_gallery": "Exit Photo Gallery",
+    "t_save_settings": "Save Settings and Exit",
+    "t_discard_settings": "Discard Settings and Exit"
+  },
+  "arcs": [
+    {
+      "from": "p_home_screen",
+      "to": "t_select_music"
+    },
+    {
+      "from": "p_home_screen",
+      "to": "t_select_photos"
+    },
+    {
+      "from": "p_home_screen",
+      "to": "t_select_settings"
+    },
+    {
+      "from": "t_select_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_pause_music"
+    },
+    {
+      "from": "t_pause_music",
+      "to": "p_music_paused"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_resume_music"
+    },
+    {
+      "from": "t_resume_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_stop_music_playing"
+    },
+    {
+      "from": "t_stop_music_playing",
+      "to": "p_home_screen"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_stop_music_paused"
+    },
+    {
+      "from": "t_stop_music_paused",
+      "to": "p_home_screen"
+    },
+    {
+      "from": "t_select_photos",
+      "to": "p_photo_gallery_active"
+    },
+    {
+      "from": "p_photo_gallery_active",
+      "to": "t_next_photo"
+    },
+    {
+      "from": "t_next_photo",
+      "to": "p_photo_gallery_active"
+    },
+    {
+      "from": "p_photo_gallery_active",
+      "to": "t_exit_gallery"
+    },
+    {
+      "from": "t_exit_gallery",
+      "to": "p_home_screen"
+    },
+    {
+      "from": "t_select_settings",
+      "to": "p_settings_open"
+    },
+    {
+      "from": "p_settings_open",
+      "to": "t_save_settings"
+    },
+    {
+      "from": "t_save_settings",
+      "to": "p_home_screen"
+    },
+    {
+      "from": "p_settings_open",
+      "to": "t_discard_settings"
+    },
+    {
+      "from": "t_discard_settings",
+      "to": "p_home_screen"
+    }
+  ],
+  "initial": {
+    "p_home_screen": 1
+  }
+}

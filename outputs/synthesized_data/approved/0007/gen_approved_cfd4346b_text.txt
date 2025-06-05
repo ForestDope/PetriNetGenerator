@@ -1,0 +1,1 @@
+A video conferencing application allows users to initiate a call. Once the connection is established, the user enters the call state. While in the call, the user can independently mute or unmute their microphone, and start or stop sharing their screen. The call can be ended at any point, which concludes the session.

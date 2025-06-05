@@ -1,0 +1,180 @@
+{
+  "places": {
+    "p_main_menu": "Main Menu Displayed",
+    "p_audio_selected": "Audio Track Selected",
+    "p_audio_playing": "Audio Track Playing",
+    "p_audio_paused": "Audio Playback Paused",
+    "p_video_selected": "Video File Selected",
+    "p_video_playing": "Video Playing",
+    "p_video_paused": "Video Playback Paused"
+  },
+  "transitions": {
+    "t_select_audio": "Select Audio",
+    "t_start_audio": "Start Audio Playback",
+    "t_pause_audio": "Pause Audio",
+    "t_resume_audio": "Resume Audio",
+    "t_stop_audio": "Stop Audio Playback",
+    "t_audio_ends": "Audio Track Finishes",
+    "t_select_video": "Select Video",
+    "t_start_video": "Start Video Playback",
+    "t_pause_video": "Pause Video",
+    "t_resume_video": "Resume Video",
+    "t_stop_video": "Stop Video Playback",
+    "t_video_ends": "Video Finishes",
+    "t_audio_to_video_switch": "Switch to Video (from Audio)",
+    "t_video_to_audio_switch": "Switch to Audio (from Video)",
+    "t_home_from_audio_playing": "Press Home (Audio Playing)",
+    "t_home_from_audio_paused": "Press Home (Audio Paused)",
+    "t_home_from_video_playing": "Press Home (Video Playing)",
+    "t_home_from_video_paused": "Press Home (Video Paused)"
+  },
+  "arcs": [
+    {
+      "from": "p_main_menu",
+      "to": "t_select_audio"
+    },
+    {
+      "from": "t_select_audio",
+      "to": "p_audio_selected"
+    },
+    {
+      "from": "p_audio_selected",
+      "to": "t_start_audio"
+    },
+    {
+      "from": "t_start_audio",
+      "to": "p_audio_playing"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_pause_audio"
+    },
+    {
+      "from": "t_pause_audio",
+      "to": "p_audio_paused"
+    },
+    {
+      "from": "p_audio_paused",
+      "to": "t_resume_audio"
+    },
+    {
+      "from": "t_resume_audio",
+      "to": "p_audio_playing"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_stop_audio"
+    },
+    {
+      "from": "t_stop_audio",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_audio_ends"
+    },
+    {
+      "from": "t_audio_ends",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_video"
+    },
+    {
+      "from": "t_select_video",
+      "to": "p_video_selected"
+    },
+    {
+      "from": "p_video_selected",
+      "to": "t_start_video"
+    },
+    {
+      "from": "t_start_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_pause_video"
+    },
+    {
+      "from": "t_pause_video",
+      "to": "p_video_paused"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_resume_video"
+    },
+    {
+      "from": "t_resume_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "t_stop_video",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_video_ends"
+    },
+    {
+      "from": "t_video_ends",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_audio_to_video_switch"
+    },
+    {
+      "from": "t_audio_to_video_switch",
+      "to": "p_video_selected"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_video_to_audio_switch"
+    },
+    {
+      "from": "t_video_to_audio_switch",
+      "to": "p_audio_selected"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_home_from_audio_playing"
+    },
+    {
+      "from": "t_home_from_audio_playing",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_audio_paused",
+      "to": "t_home_from_audio_paused"
+    },
+    {
+      "from": "t_home_from_audio_paused",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_home_from_video_playing"
+    },
+    {
+      "from": "t_home_from_video_playing",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_home_from_video_paused"
+    },
+    {
+      "from": "t_home_from_video_paused",
+      "to": "p_main_menu"
+    }
+  ],
+  "initial": {
+    "p_main_menu": 1
+  }
+}

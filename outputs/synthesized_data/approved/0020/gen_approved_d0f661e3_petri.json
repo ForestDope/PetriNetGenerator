@@ -1,0 +1,122 @@
+{
+  "places": {
+    "p_idle": "Player Idle",
+    "p_audio_playing": "Audio Playing",
+    "p_audio_paused": "Audio Paused",
+    "p_video_playing": "Video Playing",
+    "p_video_paused": "Video Paused",
+    "p_volume_control_enabled": "Volume Control Enabled"
+  },
+  "transitions": {
+    "t_select_audio": "Select and Play Audio",
+    "t_select_video": "Select and Play Video",
+    "t_pause_audio": "Pause Audio",
+    "t_resume_audio": "Resume Audio",
+    "t_stop_audio": "Stop Audio",
+    "t_pause_video": "Pause Video",
+    "t_resume_video": "Resume Video",
+    "t_stop_video": "Stop Video",
+    "t_adjust_volume": "Adjust Volume"
+  },
+  "arcs": [
+    {
+      "from": "p_idle",
+      "to": "t_select_audio"
+    },
+    {
+      "from": "t_select_audio",
+      "to": "p_audio_playing"
+    },
+    {
+      "from": "t_select_audio",
+      "to": "p_volume_control_enabled"
+    },
+    {
+      "from": "p_idle",
+      "to": "t_select_video"
+    },
+    {
+      "from": "t_select_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "t_select_video",
+      "to": "p_volume_control_enabled"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_pause_audio"
+    },
+    {
+      "from": "t_pause_audio",
+      "to": "p_audio_paused"
+    },
+    {
+      "from": "p_audio_paused",
+      "to": "t_resume_audio"
+    },
+    {
+      "from": "t_resume_audio",
+      "to": "p_audio_playing"
+    },
+    {
+      "from": "p_audio_playing",
+      "to": "t_stop_audio"
+    },
+    {
+      "from": "p_audio_paused",
+      "to": "t_stop_audio"
+    },
+    {
+      "from": "p_volume_control_enabled",
+      "to": "t_stop_audio"
+    },
+    {
+      "from": "t_stop_audio",
+      "to": "p_idle"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_pause_video"
+    },
+    {
+      "from": "t_pause_video",
+      "to": "p_video_paused"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_resume_video"
+    },
+    {
+      "from": "t_resume_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "p_video_paused",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "p_volume_control_enabled",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "t_stop_video",
+      "to": "p_idle"
+    },
+    {
+      "from": "p_volume_control_enabled",
+      "to": "t_adjust_volume"
+    },
+    {
+      "from": "t_adjust_volume",
+      "to": "p_volume_control_enabled"
+    }
+  ],
+  "initial": {
+    "p_idle": 1
+  }
+}
