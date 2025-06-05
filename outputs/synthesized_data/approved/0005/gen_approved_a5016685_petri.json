@@ -1,0 +1,171 @@
+{
+  "places": {
+    "p_idle": "Call Idle",
+    "p_call_active": "Call is Established and Active",
+    "p_video_on": "Camera is Transmitting Video",
+    "p_video_off": "Camera is Off",
+    "p_audio_on": "Microphone is Active",
+    "p_audio_muted": "Microphone is Muted",
+    "p_call_ended": "Call Has Terminated"
+  },
+  "transitions": {
+    "t_start_call": "Initiate Call",
+    "t_turn_off_camera": "Turn Off Camera",
+    "t_turn_on_camera": "Turn On Camera",
+    "t_mute_mic": "Mute Microphone",
+    "t_unmute_mic": "Unmute Microphone",
+    "t_end_call_v_on_a_on": "End Call (Video On, Audio On)",
+    "t_end_call_v_on_a_muted": "End Call (Video On, Audio Muted)",
+    "t_end_call_v_off_a_on": "End Call (Video Off, Audio On)",
+    "t_end_call_v_off_a_muted": "End Call (Video Off, Audio Muted)"
+  },
+  "arcs": [
+    {
+      "from": "p_idle",
+      "to": "t_start_call"
+    },
+    {
+      "from": "t_start_call",
+      "to": "p_call_active"
+    },
+    {
+      "from": "t_start_call",
+      "to": "p_video_on"
+    },
+    {
+      "from": "t_start_call",
+      "to": "p_audio_on"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_turn_off_camera"
+    },
+    {
+      "from": "p_video_on",
+      "to": "t_turn_off_camera"
+    },
+    {
+      "from": "t_turn_off_camera",
+      "to": "p_call_active"
+    },
+    {
+      "from": "t_turn_off_camera",
+      "to": "p_video_off"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_turn_on_camera"
+    },
+    {
+      "from": "p_video_off",
+      "to": "t_turn_on_camera"
+    },
+    {
+      "from": "t_turn_on_camera",
+      "to": "p_call_active"
+    },
+    {
+      "from": "t_turn_on_camera",
+      "to": "p_video_on"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_mute_mic"
+    },
+    {
+      "from": "p_audio_on",
+      "to": "t_mute_mic"
+    },
+    {
+      "from": "t_mute_mic",
+      "to": "p_call_active"
+    },
+    {
+      "from": "t_mute_mic",
+      "to": "p_audio_muted"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_unmute_mic"
+    },
+    {
+      "from": "p_audio_muted",
+      "to": "t_unmute_mic"
+    },
+    {
+      "from": "t_unmute_mic",
+      "to": "p_call_active"
+    },
+    {
+      "from": "t_unmute_mic",
+      "to": "p_audio_on"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_end_call_v_on_a_on"
+    },
+    {
+      "from": "p_video_on",
+      "to": "t_end_call_v_on_a_on"
+    },
+    {
+      "from": "p_audio_on",
+      "to": "t_end_call_v_on_a_on"
+    },
+    {
+      "from": "t_end_call_v_on_a_on",
+      "to": "p_call_ended"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_end_call_v_on_a_muted"
+    },
+    {
+      "from": "p_video_on",
+      "to": "t_end_call_v_on_a_muted"
+    },
+    {
+      "from": "p_audio_muted",
+      "to": "t_end_call_v_on_a_muted"
+    },
+    {
+      "from": "t_end_call_v_on_a_muted",
+      "to": "p_call_ended"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_end_call_v_off_a_on"
+    },
+    {
+      "from": "p_video_off",
+      "to": "t_end_call_v_off_a_on"
+    },
+    {
+      "from": "p_audio_on",
+      "to": "t_end_call_v_off_a_on"
+    },
+    {
+      "from": "t_end_call_v_off_a_on",
+      "to": "p_call_ended"
+    },
+    {
+      "from": "p_call_active",
+      "to": "t_end_call_v_off_a_muted"
+    },
+    {
+      "from": "p_video_off",
+      "to": "t_end_call_v_off_a_muted"
+    },
+    {
+      "from": "p_audio_muted",
+      "to": "t_end_call_v_off_a_muted"
+    },
+    {
+      "from": "t_end_call_v_off_a_muted",
+      "to": "p_call_ended"
+    }
+  ],
+  "initial": {
+    "p_idle": 1
+  }
+}

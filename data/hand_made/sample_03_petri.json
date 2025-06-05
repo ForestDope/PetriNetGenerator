@@ -1,0 +1,47 @@
+{
+    "places": {
+      "p_presenting_q": "Presenting Question",
+      "p_waiting_answer": "Waiting for User Answer",
+      "p_checking_answer": "Checking Submitted Answer",
+      "p_answer_checked": "Answer Validity Determined",
+      "p_hint_visible": "Hint is Visible",
+      "p_correct_ack": "Correct Answer Acknowledged",
+      "p_quiz_finished": "Quiz Finished" 
+    },
+    "transitions": {
+      "t_show_question": "Show Question", 
+      "t_submit_answer": "User Submits Answer",
+      "t_check_answer": "Check Answer Correctness",
+      "t_process_correct": "Process Correct Answer",
+      "t_process_incorrect": "Process Incorrect Answer",
+      "t_ack_hint": "User Acknowledges Hint",
+      "t_load_next_q": "Load Next Question", 
+      "t_finish_quiz": "Finish Quiz" 
+    },
+    "arcs": [
+      
+      { "from": "p_presenting_q", "to": "t_show_question" }, 
+      { "from": "t_show_question", "to": "p_waiting_answer" },
+      
+      { "from": "p_waiting_answer", "to": "t_submit_answer" },
+      { "from": "t_submit_answer", "to": "p_checking_answer" },
+      { "from": "p_checking_answer", "to": "t_check_answer" },
+      { "from": "t_check_answer", "to": "p_answer_checked" },
+      
+      { "from": "p_answer_checked", "to": "t_process_correct" },
+      { "from": "p_answer_checked", "to": "t_process_incorrect" },
+      
+      { "from": "t_process_incorrect", "to": "p_hint_visible" },
+      { "from": "p_hint_visible", "to": "t_ack_hint" },
+      { "from": "t_ack_hint", "to": "p_presenting_q" }, 
+     
+      { "from": "t_process_correct", "to": "p_correct_ack" },
+      { "from": "p_correct_ack", "to": "t_load_next_q" }, 
+      { "from": "t_load_next_q", "to": "p_presenting_q" }, 
+      { "from": "p_correct_ack", "to": "t_finish_quiz" }, 
+      { "from": "t_finish_quiz", "to": "p_quiz_finished" }
+    ],
+    "initial": {
+      "p_presenting_q": 1 
+    }
+  }

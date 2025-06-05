@@ -1,0 +1,93 @@
+{
+  "places": {
+    "p_idle": "Application Idle",
+    "p_image_loaded": "Image Loaded, Ready for Edit",
+    "p_filter_applied": "Filter Applied",
+    "p_image_cropped": "Image Cropped",
+    "p_saving_image": "Saving Process Active",
+    "p_image_saved": "Image Saved Successfully"
+  },
+  "transitions": {
+    "t_load_image": "Load Image",
+    "t_apply_filter": "Apply Filter",
+    "t_crop_image": "Crop Image",
+    "t_save_filtered_image": "Save Filtered Image",
+    "t_save_cropped_image": "Save Cropped Image",
+    "t_complete_save": "Saving Process Completes",
+    "t_discard_filtered_changes": "Discard Filtered Changes",
+    "t_discard_cropped_changes": "Discard Cropped Changes"
+  },
+  "arcs": [
+    {
+      "from": "p_idle",
+      "to": "t_load_image"
+    },
+    {
+      "from": "t_load_image",
+      "to": "p_image_loaded"
+    },
+    {
+      "from": "p_image_loaded",
+      "to": "t_apply_filter"
+    },
+    {
+      "from": "t_apply_filter",
+      "to": "p_filter_applied"
+    },
+    {
+      "from": "p_image_loaded",
+      "to": "t_crop_image"
+    },
+    {
+      "from": "t_crop_image",
+      "to": "p_image_cropped"
+    },
+    {
+      "from": "p_filter_applied",
+      "to": "t_save_filtered_image"
+    },
+    {
+      "from": "t_save_filtered_image",
+      "to": "p_saving_image"
+    },
+    {
+      "from": "p_image_cropped",
+      "to": "t_save_cropped_image"
+    },
+    {
+      "from": "t_save_cropped_image",
+      "to": "p_saving_image"
+    },
+    {
+      "from": "p_saving_image",
+      "to": "t_complete_save"
+    },
+    {
+      "from": "t_complete_save",
+      "to": "p_image_saved"
+    },
+    {
+      "from": "p_image_saved",
+      "to": "p_idle"
+    },
+    {
+      "from": "p_filter_applied",
+      "to": "t_discard_filtered_changes"
+    },
+    {
+      "from": "t_discard_filtered_changes",
+      "to": "p_idle"
+    },
+    {
+      "from": "p_image_cropped",
+      "to": "t_discard_cropped_changes"
+    },
+    {
+      "from": "t_discard_cropped_changes",
+      "to": "p_idle"
+    }
+  ],
+  "initial": {
+    "p_idle": 1
+  }
+}

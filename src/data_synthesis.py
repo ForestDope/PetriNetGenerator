@@ -71,7 +71,7 @@ def save_final_sample_files(text_content, petri_json_data,
     actual_save_dir = target_parent_dir
     if status_suffix == "approved" and use_numbered_subfolder:
         next_index = _get_next_approved_folder_index(target_parent_dir)
-        actual_save_dir = target_parent_dir / f"{next_index:04d}" # e.g., /approved/0001/
+        actual_save_dir = target_parent_dir / f"{next_index:04d}"
     
     actual_save_dir.mkdir(parents=True, exist_ok=True)
 
@@ -231,7 +231,7 @@ Ensure your output is a single JSON object adhering strictly to the format speci
         temp_json_path = REVIEW_TEMP_DIR / f"{candidate_id_base}_petri.json"
         
         temp_pdf_for_review: Path | None = None
-        temp_gv_for_review: Path | None = None # Keep track of GV for cleanup
+        # temp_gv_for_review is no longer needed as petri_json_to_dot doesn't return a persistent GV path
 
         try:
             with open(temp_text_path, 'w', encoding='utf-8') as f: f.write(new_text)
@@ -241,8 +241,9 @@ Ensure your output is a single JSON object adhering strictly to the format speci
         print(f"  Candidate text/JSON for review in: {REVIEW_TEMP_DIR.resolve()} (ID: {candidate_id_base})")
         
         try:
-            # Generate PDF and GV in REVIEW_TEMP_DIR for viewing
-            pdf_path_obj, gv_path_obj = petri_json_to_dot(
+            # Generate PDF in REVIEW_TEMP_DIR for viewing
+            # petri_json_to_dot now returns (Path | None, None)
+            pdf_path_obj, _ = petri_json_to_dot( # Second value is always None
                 new_petri_json,
                 filename=candidate_id_base,
                 output_dir=REVIEW_TEMP_DIR
@@ -250,22 +251,17 @@ Ensure your output is a single JSON object adhering strictly to the format speci
             if pdf_path_obj and pdf_path_obj.exists():
                 temp_pdf_for_review = pdf_path_obj
                 print(f"  Visualization for review (PDF): {temp_pdf_for_review.resolve()}")
-            if gv_path_obj and gv_path_obj.exists(): # GV for review also created
-                temp_gv_for_review = gv_path_obj # Keep track for cleanup
-                if not temp_pdf_for_review:
-                     print(f"  Visualization for review (GV only): {temp_gv_for_review.resolve()} (PDF failed)")
-            if not temp_pdf_for_review and not temp_gv_for_review:
-                 print(f"  Visualization generation for review failed.")
+            else: # Covers case where pdf_path_obj is None or doesn't exist
+                 print(f"  PDF Visualization generation for review failed.")
         except Exception as e: print(f"  Warning: Error calling petri_json_to_dot for review: {e}")
 
-        # --- Manual Review Prompt (as before) ---
+        # --- Manual Review Prompt ---
         print("\n" + "="*50 + "\n  >>> MANUAL REVIEW REQUIRED <<< \n" + "="*50)
-        # ... (print paths and full text/JSON)
         print(f"  Reviewing Candidate ID: {candidate_id_base}\n  Files for review are in: {REVIEW_TEMP_DIR.resolve()}")
         if temp_text_path.exists(): print(f"    Text: {temp_text_path.name}")
         if temp_json_path.exists(): print(f"    JSON: {temp_json_path.name}")
         if temp_pdf_for_review: print(f"    Viz PDF: {temp_pdf_for_review.name}")
-        if temp_gv_for_review and not temp_pdf_for_review : print(f"    Viz GV: {temp_gv_for_review.name}")
+        # No separate GV file to list here from petri_json_to_dot's return
         print(f"\n  Full Scenario Text:\n{new_text}\n\n  Full Petri Net JSON:\n{json.dumps(new_petri_json, indent=2)}\n")
 
 
@@ -287,32 +283,29 @@ Ensure your output is a single JSON object adhering strictly to the format speci
             if is_approved: generated_and_approved_count += 1
             print(f"  Sample {status_suffix_for_sample}. Text/JSON saved to: {final_save_dir.resolve()} with stem: {final_filename_stem}")
 
-            # --- MODIFIED: Generate NEW PDF and GV directly into the final location ---
-            print(f"  Generating final visualization in: {final_save_dir.resolve()}")
-            final_pdf_path, final_gv_path = petri_json_to_dot(
+            # --- Generate NEW PDF directly into the final location ---
+            print(f"  Generating final PDF visualization in: {final_save_dir.resolve()}")
+            # petri_json_to_dot now returns (Path | None, None)
+            final_pdf_path, _ = petri_json_to_dot( # Second value is always None
                 new_petri_json,
                 filename=final_filename_stem, # Use the new final stem
                 output_dir=final_save_dir    # Save directly to final sample folder
             )
             if final_pdf_path and final_pdf_path.exists():
                 print(f"  Final PDF visualization saved: {final_pdf_path.resolve()}")
-            if final_gv_path and final_gv_path.exists():
-                 if not final_pdf_path or not final_pdf_path.exists():
-                    print(f"  Final GV visualization saved (PDF failed): {final_gv_path.resolve()}")
-                 # else: GV save is implicit if PDF worked with current petri_json_to_dot
-            if not final_pdf_path and not final_gv_path:
-                print(f"  Failed to generate final visualization in {final_save_dir.resolve()}")
+            else:
+                print(f"  Failed to generate final PDF visualization in {final_save_dir.resolve()}")
         else:
             print("  Error during final saving of text/JSON. Final visualization not generated.")
 
         # --- Cleanup temporary files from REVIEW_TEMP_DIR ---
         files_to_clean_in_review_temp = [temp_text_path, temp_json_path]
         if temp_pdf_for_review: files_to_clean_in_review_temp.append(temp_pdf_for_review)
-        if temp_gv_for_review: files_to_clean_in_review_temp.append(temp_gv_for_review)
+        # temp_gv_for_review is no longer tracked or returned by petri_json_to_dot
         
         # print(f"  [DEBUG] Files to cleanup in review_temp: {[f.name for f in files_to_clean_in_review_temp if f and f.exists()]}")
         for f_path in files_to_clean_in_review_temp:
-            if f_path and f_path.exists() and f_path.parent == REVIEW_TEMP_DIR:
+            if f_path and f_path.exists() and f_path.parent == REVIEW_TEMP_DIR: # Check parent to be safe
                 try:
                     f_path.unlink()
                     # print(f"  Cleaned up temp review file: {f_path.name}")

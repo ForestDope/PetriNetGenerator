@@ -1,0 +1,137 @@
+{
+  "places": {
+    "p_idle": "Idle",
+    "p_video_loaded_stopped": "Video Loaded and Stopped",
+    "p_playing_std_q": "Playing (Standard Quality)",
+    "p_playing_high_q": "Playing (High Quality)",
+    "p_paused_std_q": "Paused (Standard Quality)",
+    "p_paused_high_q": "Paused (High Quality)",
+    "p_video_finished": "Video Playback Finished"
+  },
+  "transitions": {
+    "t_load_video": "Load Video",
+    "t_start_play_std": "Start Playback (Standard Q)",
+    "t_pause_video_std": "Pause Video (from Standard Q)",
+    "t_pause_video_high": "Pause Video (from High Q)",
+    "t_resume_video_std": "Resume Video (to Standard Q)",
+    "t_resume_video_high": "Resume Video (to High Q)",
+    "t_change_to_high_q": "Change Quality to High",
+    "t_change_to_std_q": "Change Quality to Standard",
+    "t_stop_video": "Stop Video Playback",
+    "t_video_ends_naturally": "Video Ends Naturally",
+    "t_unload_video": "Unload Video / Return to Idle"
+  },
+  "arcs": [
+    {
+      "from": "p_idle",
+      "to": "t_load_video"
+    },
+    {
+      "from": "t_load_video",
+      "to": "p_video_loaded_stopped"
+    },
+    {
+      "from": "p_video_loaded_stopped",
+      "to": "t_start_play_std"
+    },
+    {
+      "from": "t_start_play_std",
+      "to": "p_playing_std_q"
+    },
+    {
+      "from": "p_playing_std_q",
+      "to": "t_pause_video_std"
+    },
+    {
+      "from": "t_pause_video_std",
+      "to": "p_paused_std_q"
+    },
+    {
+      "from": "p_playing_std_q",
+      "to": "t_change_to_high_q"
+    },
+    {
+      "from": "t_change_to_high_q",
+      "to": "p_playing_high_q"
+    },
+    {
+      "from": "p_playing_std_q",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "p_playing_std_q",
+      "to": "t_video_ends_naturally"
+    },
+    {
+      "from": "p_playing_high_q",
+      "to": "t_pause_video_high"
+    },
+    {
+      "from": "t_pause_video_high",
+      "to": "p_paused_high_q"
+    },
+    {
+      "from": "p_playing_high_q",
+      "to": "t_change_to_std_q"
+    },
+    {
+      "from": "t_change_to_std_q",
+      "to": "p_playing_std_q"
+    },
+    {
+      "from": "p_playing_high_q",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "p_playing_high_q",
+      "to": "t_video_ends_naturally"
+    },
+    {
+      "from": "p_paused_std_q",
+      "to": "t_resume_video_std"
+    },
+    {
+      "from": "t_resume_video_std",
+      "to": "p_playing_std_q"
+    },
+    {
+      "from": "p_paused_std_q",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "p_paused_high_q",
+      "to": "t_resume_video_high"
+    },
+    {
+      "from": "t_resume_video_high",
+      "to": "p_playing_high_q"
+    },
+    {
+      "from": "p_paused_high_q",
+      "to": "t_stop_video"
+    },
+    {
+      "from": "t_stop_video",
+      "to": "p_video_loaded_stopped"
+    },
+    {
+      "from": "t_video_ends_naturally",
+      "to": "p_video_finished"
+    },
+    {
+      "from": "p_video_loaded_stopped",
+      "to": "t_unload_video"
+    },
+    {
+      "from": "p_video_finished",
+      "to": "t_unload_video"
+    },
+    {
+      "from": "t_unload_video",
+      "to": "p_idle"
+    }
+  ],
+  "initial": {
+    "p_idle": 1
+  }
+}

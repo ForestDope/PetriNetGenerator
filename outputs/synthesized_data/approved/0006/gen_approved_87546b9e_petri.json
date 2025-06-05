@@ -1,0 +1,96 @@
+{
+  "places": {
+    "p_main_menu": "Main Menu",
+    "p_music_playing": "Music Playing",
+    "p_music_paused": "Music Paused",
+    "p_slideshow_active": "Slideshow Active"
+  },
+  "transitions": {
+    "t_select_play_music": "Select Play Music",
+    "t_select_view_photos": "Select View Photos",
+    "t_pause_music": "Pause Music",
+    "t_resume_music": "Resume Music",
+    "t_stop_music_playing": "Stop Music (from Playing)",
+    "t_stop_music_paused": "Stop Music (from Paused)",
+    "t_next_photo": "Next Photo",
+    "t_prev_photo": "Previous Photo",
+    "t_return_from_slideshow": "Return to Main Menu (from Slideshow)"
+  },
+  "arcs": [
+    {
+      "from": "p_main_menu",
+      "to": "t_select_play_music"
+    },
+    {
+      "from": "t_select_play_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_pause_music"
+    },
+    {
+      "from": "t_pause_music",
+      "to": "p_music_paused"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_resume_music"
+    },
+    {
+      "from": "t_resume_music",
+      "to": "p_music_playing"
+    },
+    {
+      "from": "p_music_playing",
+      "to": "t_stop_music_playing"
+    },
+    {
+      "from": "t_stop_music_playing",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_music_paused",
+      "to": "t_stop_music_paused"
+    },
+    {
+      "from": "t_stop_music_paused",
+      "to": "p_main_menu"
+    },
+    {
+      "from": "p_main_menu",
+      "to": "t_select_view_photos"
+    },
+    {
+      "from": "t_select_view_photos",
+      "to": "p_slideshow_active"
+    },
+    {
+      "from": "p_slideshow_active",
+      "to": "t_next_photo"
+    },
+    {
+      "from": "t_next_photo",
+      "to": "p_slideshow_active"
+    },
+    {
+      "from": "p_slideshow_active",
+      "to": "t_prev_photo"
+    },
+    {
+      "from": "t_prev_photo",
+      "to": "p_slideshow_active"
+    },
+    {
+      "from": "p_slideshow_active",
+      "to": "t_return_from_slideshow"
+    },
+    {
+      "from": "t_return_from_slideshow",
+      "to": "p_main_menu"
+    }
+  ],
+  "initial": {
+    "p_main_menu": 1
+  }
+}

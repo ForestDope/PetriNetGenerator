@@ -1,0 +1,56 @@
+{
+    "places": {
+      "p_idle": "Idle",
+      "p_playlist_loaded": "Playlist Loaded, Ready to Play",
+      "p_track_playing": "Audio Track Playing",
+      "p_fetching_art": "Fetching Album Art",
+      "p_art_fetched": "Album Art Fetched/Available", 
+      "p_ready_for_next": "Ready for Next Track Decision",
+      "p_session_ended": "Playback Session Ended"
+    },
+    "transitions": {
+      "t_load_playlist": "Load Playlist",
+      "t_start_next_track": "Start Next Track",
+      "t_start_art_fetch": "Start Art Fetch", 
+      "t_art_fetch_complete": "Art Fetch Complete",
+      "t_track_ends_normally": "Track Finishes Naturally",
+      "t_user_skips": "User Presses Skip",
+      "t_check_playlist": "Check if Playlist Has More Tracks", 
+      "t_play_subsequent": "Play Subsequent Track", 
+      "t_playlist_empty": "Playlist is Empty", 
+      "t_user_stops_all": "User Presses Global Stop" 
+    },
+    "arcs": [
+      
+      { "from": "p_idle", "to": "t_load_playlist" },
+      { "from": "t_load_playlist", "to": "p_playlist_loaded" },
+      
+      { "from": "p_playlist_loaded", "to": "t_start_next_track" }, 
+      { "from": "t_start_next_track", "to": "p_track_playing" },
+      
+      { "from": "t_start_next_track", "to": "p_fetching_art" }, 
+      { "from": "p_fetching_art", "to": "t_art_fetch_complete" }, 
+      { "from": "t_art_fetch_complete", "to": "p_art_fetched" }, 
+      
+      { "from": "p_track_playing", "to": "t_track_ends_normally" },
+      { "from": "p_fetching_art", "to": "t_track_ends_normally" }, 
+      { "from": "t_track_ends_normally", "to": "p_ready_for_next" },
+      { "from": "p_track_playing", "to": "t_user_skips" },
+      { "from": "p_fetching_art", "to": "t_user_skips" }, 
+      { "from": "t_user_skips", "to": "p_ready_for_next" },
+     
+      { "from": "p_track_playing", "to": "t_user_stops_all" },
+      { "from": "p_fetching_art", "to": "t_user_stops_all" }, 
+      { "from": "t_user_stops_all", "to": "p_session_ended" },
+      
+      { "from": "p_ready_for_next", "to": "t_check_playlist" },
+      { "from": "t_check_playlist", "to": "t_play_subsequent" }, 
+      { "from": "t_check_playlist", "to": "t_playlist_empty" }, 
+      
+      { "from": "t_play_subsequent", "to": "t_start_next_track" },
+      { "from": "t_playlist_empty", "to": "p_session_ended" }
+    ],
+    "initial": {
+      "p_idle": 1
+    }
+  }

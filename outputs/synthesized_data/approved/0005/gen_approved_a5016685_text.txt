@@ -1,0 +1,1 @@
+A user can initiate a video call. Upon starting, both the user's camera and microphone are active. During the call, the user can independently mute their microphone or turn off their camera. They can also unmute the microphone or turn the camera back on. The call can be ended at any time, which deactivates both video and audio components and concludes the session.

@@ -1,0 +1,78 @@
+{
+  "places": {
+    "p_gallery_menu": "Gallery Menu",
+    "p_album_view": "Album View (Thumbnails)",
+    "p_photo_view": "Photo View (Full Screen)",
+    "p_session_ended": "Gallery Session Ended"
+  },
+  "transitions": {
+    "t_select_album": "Select Album",
+    "t_view_photo": "View Photo",
+    "t_next_photo": "Navigate Next Photo",
+    "t_prev_photo": "Navigate Previous Photo",
+    "t_exit_photo_view": "Exit Photo View",
+    "t_exit_album_view": "Exit Album View",
+    "t_exit_gallery": "Exit Gallery"
+  },
+  "arcs": [
+    {
+      "from": "p_gallery_menu",
+      "to": "t_select_album"
+    },
+    {
+      "from": "t_select_album",
+      "to": "p_album_view"
+    },
+    {
+      "from": "p_album_view",
+      "to": "t_view_photo"
+    },
+    {
+      "from": "t_view_photo",
+      "to": "p_photo_view"
+    },
+    {
+      "from": "p_photo_view",
+      "to": "t_next_photo"
+    },
+    {
+      "from": "t_next_photo",
+      "to": "p_photo_view"
+    },
+    {
+      "from": "p_photo_view",
+      "to": "t_prev_photo"
+    },
+    {
+      "from": "t_prev_photo",
+      "to": "p_photo_view"
+    },
+    {
+      "from": "p_photo_view",
+      "to": "t_exit_photo_view"
+    },
+    {
+      "from": "t_exit_photo_view",
+      "to": "p_album_view"
+    },
+    {
+      "from": "p_album_view",
+      "to": "t_exit_album_view"
+    },
+    {
+      "from": "t_exit_album_view",
+      "to": "p_gallery_menu"
+    },
+    {
+      "from": "p_gallery_menu",
+      "to": "t_exit_gallery"
+    },
+    {
+      "from": "t_exit_gallery",
+      "to": "p_session_ended"
+    }
+  ],
+  "initial": {
+    "p_gallery_menu": 1
+  }
+}
