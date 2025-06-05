@@ -121,9 +121,10 @@ python src/main.py <action> [options]
 2.  **`forward_gen`**: Generate new (scenario text, Petri net JSON) pairs using the LLM. This involves a manual review step.
     *   `--num_forward_samples <N>`: Number of new pairs to generate (default: 1).
     *   `--num_few_shot <N>`: Number of hand-made examples to use for few-shot prompting (default: 2).
+    *   `--interactive-theme`: Prompt the user for a theme before generating samples.
     *Example:*
     ```bash
-    python src/main.py forward_gen --num_forward_samples 1 --num_few_shot 3
+    python src/main.py forward_gen --interactive-theme --num_forward_samples 1 --num_few_shot 3
     ```
     During this process, candidates are saved in `outputs/review_temp/`. You will be prompted in the console to approve or reject each candidate.
 
