@@ -155,8 +155,13 @@ def build_few_shot_prompt_from_handmade(num_examples=2):
     return prompt_str
 
 # --- Data Synthesis Method 2: Forward Generation (Text + JSON) ---
-def synthesize_forward_generation(few_shot_examples_text, num_new_samples=1):
+def synthesize_forward_generation(few_shot_examples_text, num_new_samples=1, theme=None):
     print(f"\nAttempting forward generation of {num_new_samples} new (Text, JSON) pair(s)...")
+    if theme:
+        print(f"Using theme: '{theme}'")
+    # Prepare a theme header for the LLM prompt (empty if no theme)
+    theme_instruction = f"Theme: {theme}\n\n" if theme else ""
+
     # --- FULL System Instruction (ensure your complete prompt is here) ---
     system_instruction = f"""
 You are an expert in modeling multimedia scenarios using Petri Nets.
@@ -192,8 +197,7 @@ Example (looping):
 }}
 """
     # --- FULL User Prompt Template (ensure your complete template is here) ---
-    user_prompt_template = f"""
-Here are some examples of existing (Scenario Text, Petri Net JSON) pairs to guide your generation style and complexity. Learn from these:
+    user_prompt_template = f"""{theme_instruction}Here are some examples of existing (Scenario Text, Petri Net JSON) pairs to guide your generation style and complexity. Learn from these:
 --- FEW-SHOT EXAMPLES START ---
 {few_shot_examples_text}
 --- FEW-SHOT EXAMPLES END ---
@@ -210,7 +214,7 @@ Ensure your output is a single JSON object adhering strictly to the format speci
         # ... (LLM call and initial validation for new_text, new_petri_json as before) ...
         generated_pair_dict = get_llm_response(
             prompt_text=user_prompt_template, system_instruction=system_instruction,
-            json_mode=True, temperature=0.7
+            json_mode=True, temperature=1.0
         )
         if not generated_pair_dict or not isinstance(generated_pair_dict, dict):
             save_auto_rejected_sample(generated_pair_dict or {},"", "llm_response_error", candidate_id_base); continue

@@ -1,0 +1,127 @@
+{
+  "places": {
+    "p_title_slide": "Title Slide",
+    "p_slide1_intro": "Slide 1: Introduction",
+    "p_slide2_circuits": "Slide 2: Basic Circuits",
+    "p_slide3_ohms_law": "Slide 3: Ohm's Law",
+    "p_video_playing": "Embedded Video Playing",
+    "p_quiz_active": "Quiz Active",
+    "p_course_ended": "Course Ended (Quit)",
+    "p_course_completed": "Course Completed (Quiz)"
+  },
+  "transitions": {
+    "t_start_course": "Start Course from Title",
+    "t_next_slide1_to_slide2": "Next Slide (S1 to S2)",
+    "t_prev_slide2_to_slide1": "Previous Slide (S2 to S1)",
+    "t_next_slide2_to_slide3": "Next Slide (S2 to S3)",
+    "t_prev_slide3_to_slide2": "Previous Slide (S3 to S2)",
+    "t_watch_video": "Watch Embedded Video",
+    "t_video_playback_ends": "Video Playback Ends",
+    "t_proceed_to_quiz": "Proceed to Quiz",
+    "t_quiz_complete": "Quiz Completed",
+    "t_quit_from_slide1": "Quit Course from Slide 1",
+    "t_quit_from_slide2": "Quit Course from Slide 2",
+    "t_quit_from_slide3": "Quit Course from Slide 3"
+  },
+  "arcs": [
+    {
+      "from": "p_title_slide",
+      "to": "t_start_course"
+    },
+    {
+      "from": "t_start_course",
+      "to": "p_slide1_intro"
+    },
+    {
+      "from": "p_slide1_intro",
+      "to": "t_next_slide1_to_slide2"
+    },
+    {
+      "from": "t_next_slide1_to_slide2",
+      "to": "p_slide2_circuits"
+    },
+    {
+      "from": "p_slide1_intro",
+      "to": "t_quit_from_slide1"
+    },
+    {
+      "from": "t_quit_from_slide1",
+      "to": "p_course_ended"
+    },
+    {
+      "from": "p_slide2_circuits",
+      "to": "t_next_slide2_to_slide3"
+    },
+    {
+      "from": "t_next_slide2_to_slide3",
+      "to": "p_slide3_ohms_law"
+    },
+    {
+      "from": "p_slide2_circuits",
+      "to": "t_prev_slide2_to_slide1"
+    },
+    {
+      "from": "t_prev_slide2_to_slide1",
+      "to": "p_slide1_intro"
+    },
+    {
+      "from": "p_slide2_circuits",
+      "to": "t_quit_from_slide2"
+    },
+    {
+      "from": "t_quit_from_slide2",
+      "to": "p_course_ended"
+    },
+    {
+      "from": "p_slide3_ohms_law",
+      "to": "t_watch_video"
+    },
+    {
+      "from": "t_watch_video",
+      "to": "p_video_playing"
+    },
+    {
+      "from": "p_video_playing",
+      "to": "t_video_playback_ends"
+    },
+    {
+      "from": "t_video_playback_ends",
+      "to": "p_slide3_ohms_law"
+    },
+    {
+      "from": "p_slide3_ohms_law",
+      "to": "t_proceed_to_quiz"
+    },
+    {
+      "from": "t_proceed_to_quiz",
+      "to": "p_quiz_active"
+    },
+    {
+      "from": "p_quiz_active",
+      "to": "t_quiz_complete"
+    },
+    {
+      "from": "t_quiz_complete",
+      "to": "p_course_completed"
+    },
+    {
+      "from": "p_slide3_ohms_law",
+      "to": "t_prev_slide3_to_slide2"
+    },
+    {
+      "from": "t_prev_slide3_to_slide2",
+      "to": "p_slide2_circuits"
+    },
+    {
+      "from": "p_slide3_ohms_law",
+      "to": "t_quit_from_slide3"
+    },
+    {
+      "from": "t_quit_from_slide3",
+      "to": "p_course_ended"
+    }
+  ],
+  "initial": {
+    "p_title_slide": 1
+  }
+}

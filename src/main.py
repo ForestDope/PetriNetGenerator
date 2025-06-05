@@ -64,10 +64,28 @@ def cli_paraphrase(args):
         synthesize_paraphrases(original_text, original_petri_json, args.num_paraphrases, args.sample_id)
     else: print(f"Could not load hand-made sample '{args.sample_id}'.")
 
+def get_user_theme():
+    """Prompt user for a theme and return it."""
+    print("\n" + "="*40)
+    print("INTERACTIVE THEME MODE")
+    print("="*40)
+    while True:
+        theme = input("Enter desired theme (e.g. 'nature', 'technology'): ").strip()
+        if not theme:
+            print("  Please enter a non-empty theme.\n")
+            continue
+        confirm = input(f"Confirm theme '{theme}'? (y/n): ").strip().lower()
+        if confirm in ('y','yes'):
+            return theme
+        print("Let's try again...\n")
+
 def cli_forward_gen(args):
+    theme = None
+    if getattr(args, 'interactive_theme', False):
+        theme = get_user_theme()
     few_shot_prompt_text = build_few_shot_prompt_from_handmade(args.num_few_shot)
     if not few_shot_prompt_text: print("Error: Could not build few-shot examples."); return
-    synthesize_forward_generation(few_shot_prompt_text, args.num_forward_samples)
+    synthesize_forward_generation(few_shot_prompt_text, args.num_forward_samples, theme)
 
 def cli_validate_sample(args):
     if not args.sample_id: print("Error: --sample_id for validation."); return
@@ -137,8 +155,12 @@ def main():
     p_paraphrase.set_defaults(func=cli_paraphrase)
 
     p_forward_gen = subparsers.add_parser("forward_gen", help="Generate new (Text, JSON) pairs via LLM.")
-    p_forward_gen.add_argument("--num_forward_samples", type=int, default=1, help="Number of new pairs (default: 1).")
-    p_forward_gen.add_argument("--num_few_shot", type=int, default=2, help="Few-shot examples (default: 2).")
+    p_forward_gen.add_argument("--num_forward_samples", type=int, default=1, 
+                               help="Number of new pairs (default: 1).")
+    p_forward_gen.add_argument("--num_few_shot", type=int, default=2, 
+                               help="Few-shot examples (default: 2).")
+    p_forward_gen.add_argument("--interactive-theme", action="store_true",
+                               help="Ask user for a theme before generating samples")
     p_forward_gen.set_defaults(func=cli_forward_gen)
 
     p_validate = subparsers.add_parser("validate_sample", help="Validate a Petri Net JSON sample.")
