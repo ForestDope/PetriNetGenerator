@@ -171,21 +171,21 @@ python src/main.py <action> [options]
     *   `arcs`: An array of objects, each defining a directed connection (`from` node ID, `to` node ID).
     *   `initial`: An object mapping place IDs to their initial token count (must be >= 1).
 
-## Fine-tuning
+## Fine-tuning (Experimental – Non-functional)
 
-A script `src/train_model.py` is provided to convert your approved synthesized samples into train/val splits, tokenize them, and fine-tune a seq2seq model (e.g., T5). It also defines a placeholder for a custom Petri-net loss function (to compare graph structures rather than raw JSON).
+> **Warning:** This fine-tuning workflow is experimental, does not function correctly, and produces invalid results. It is provided for illustration only and should **not** be used.
 
-Dependencies:
+Dependencies (for reference):
 
 ```bash
 pip install transformers datasets
 ```
 
-Usage:
+Usage (reference only – results will be incorrect):
 
 ```bash
 python src/train_model.py \
-  --model  \
+  --model <model_name> \
   --train_ratio 0.8 \
   --epochs 3
 ```
