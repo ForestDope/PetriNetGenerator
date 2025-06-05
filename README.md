@@ -67,7 +67,9 @@ This project focuses on generating, validating, and visualizing Petri net data s
     ├── llm_interaction.py  # Interface for communicating with the LLM
     ├── main.py           # Command-line interface entry point
     ├── petri_net_utils.py  # Utilities for Petri net visualization
-    └── validation.py     # Petri net validation logic
+    ├── validation.py     # Petri net validation logic
+    ├── train_model.py    # Fine-tune a model on (scenario text → Petri-net JSON)
+    └── inference.py      # CLI to generate JSON from user-entered scenario text
 ```
 
 ## Setup and Installation
