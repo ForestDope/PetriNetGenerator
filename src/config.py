@@ -27,6 +27,10 @@ REVIEW_TEMP_DIR = OUTPUTS_DIR / "review_temp"
 
 PETRI_NET_SCHEMA_PATH = SCHEMAS_DIR / "petri_net_schema.json"
 
+# Directories for training/validation splits
+TRAIN_DATA_DIR = OUTPUTS_DIR / "train_data"
+VAL_DATA_DIR   = OUTPUTS_DIR / "val_data"
+
 # Ensure Directories Exist
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 HAND_MADE_DIR.mkdir(parents=True, exist_ok=True)
@@ -39,6 +43,8 @@ SYNTHESIZED_REJECTED_MANUAL_DIR.mkdir(parents=True, exist_ok=True)
 INVALID_AUTO_REJECTED_DIR.mkdir(parents=True, exist_ok=True)
 
 REVIEW_TEMP_DIR.mkdir(parents=True, exist_ok=True)
+TRAIN_DATA_DIR.mkdir(parents=True, exist_ok=True)
+VAL_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 if not GOOGLE_API_KEY: print("CRITICAL ERROR: GOOGLE_API_KEY not found.")
 if not PETRI_NET_SCHEMA_PATH.exists(): print(f"Warning: Schema file not found: {PETRI_NET_SCHEMA_PATH}")

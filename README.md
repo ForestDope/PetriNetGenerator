@@ -169,6 +169,32 @@ python src/main.py <action> [options]
     *   `arcs`: An array of objects, each defining a directed connection (`from` node ID, `to` node ID).
     *   `initial`: An object mapping place IDs to their initial token count (must be >= 1).
 
+## Fine-tuning
+
+A script `src/train_model.py` is provided to convert your approved synthesized samples into train/val splits, tokenize them, and fine-tune a seq2seq model (e.g., T5). It also defines a placeholder for a custom Petri-net loss function (to compare graph structures rather than raw JSON).
+
+Dependencies:
+
+```bash
+pip install transformers datasets
+```
+
+Usage:
+
+```bash
+python src/train_model.py \
+  --model  \
+  --train_ratio 0.8 \
+  --epochs 3
+```
+
+The script will:
+
+*   Gather all `*_text.txt` + `*_petri.json` pairs from `outputs/synthesized_data/approved/`.
+*   Shuffle and split into `outputs/train_data/` and `outputs/val_data/` (as JSON records).
+*   Tokenize inputs and targets.
+*   Launch a Trainer with a `compute_loss` hook ready for a semantic Petri-net loss.
+
 ## Acknowledgments
 *   Google for the Gemini Pro API.
 *   The creators of Graphviz and `jsonschema`.

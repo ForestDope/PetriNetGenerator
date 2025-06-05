@@ -2,3 +2,8 @@ google-generativeai
 python-dotenv
 jsonschema
 graphviz
+transformers
+datasets
+torch
+torchvision
+torchaudio
