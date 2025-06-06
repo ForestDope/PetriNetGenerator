@@ -4,11 +4,11 @@ from dotenv import load_dotenv
 from pathlib import Path
 import sys
 
-dotenv_path = Path(__file__).resolve().parent.parent / '.env'
+dotenv_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=dotenv_path)
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-LLM_MODEL_GEMINI = "gemini-2.5-flash-preview-05-20" 
+LLM_MODEL_GEMINI = "gemini-2.5-flash-preview-05-20"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -29,13 +29,15 @@ PETRI_NET_SCHEMA_PATH = SCHEMAS_DIR / "petri_net_schema.json"
 
 # Directories for training/validation splits
 TRAIN_DATA_DIR = OUTPUTS_DIR / "train_data"
-VAL_DATA_DIR   = OUTPUTS_DIR / "val_data"
+VAL_DATA_DIR = OUTPUTS_DIR / "val_data"
+
+GENERATED_FROM_TEXT_DIR = OUTPUTS_DIR / "generated_from_text"
 
 # Ensure Directories Exist
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 HAND_MADE_DIR.mkdir(parents=True, exist_ok=True)
 SCHEMAS_DIR.mkdir(parents=True, exist_ok=True)
-OUTPUTS_DIR.mkdir(parents=True, exist_ok=True) # Parent output dir
+OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)  # Parent output dir
 
 SYNTHESIZED_PARENT_DIR.mkdir(parents=True, exist_ok=True)
 SYNTHESIZED_APPROVED_DIR.mkdir(parents=True, exist_ok=True)
@@ -45,8 +47,11 @@ INVALID_AUTO_REJECTED_DIR.mkdir(parents=True, exist_ok=True)
 REVIEW_TEMP_DIR.mkdir(parents=True, exist_ok=True)
 TRAIN_DATA_DIR.mkdir(parents=True, exist_ok=True)
 VAL_DATA_DIR.mkdir(parents=True, exist_ok=True)
+GENERATED_FROM_TEXT_DIR.mkdir(parents=True, exist_ok=True)
 
-if not GOOGLE_API_KEY: print("CRITICAL ERROR: GOOGLE_API_KEY not found.")
-if not PETRI_NET_SCHEMA_PATH.exists(): print(f"Warning: Schema file not found: {PETRI_NET_SCHEMA_PATH}")
+if not GOOGLE_API_KEY:
+    print("CRITICAL ERROR: GOOGLE_API_KEY not found.")
+if not PETRI_NET_SCHEMA_PATH.exists():
+    print(f"Warning: Schema file not found: {PETRI_NET_SCHEMA_PATH}")
 
 print(f"Config loaded. Synthesized data root: {SYNTHESIZED_PARENT_DIR.resolve()}")

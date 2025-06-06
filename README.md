@@ -7,10 +7,12 @@ This project focuses on generating, validating, and visualizing Petri net data s
 -   **Input:**
     -   Textual descriptions of multimedia scenarios.
     -   Hand-made examples of (scenario text, Petri net JSON) pairs.
+    -   User-provided scenario text for direct generation.
 -   **Core Processes:**
     -   **Data Synthesis:**
         -   Paraphrasing existing scenario descriptions while preserving their Petri net structure.
         -   Forward generation of novel scenario texts and their corresponding Petri net JSON using an LLM.
+        -   Direct generation of Petri net JSON from user-provided scenario text.
     -   **Validation:**
         -   Structural validation of generated Petri net JSON against a defined schema.
         -   Logical consistency checks on the Petri net structure (e.g., arc validity, node connectivity).
@@ -20,17 +22,19 @@ This project focuses on generating, validating, and visualizing Petri net data s
     -   Structured JSON files representing Petri nets (places, transitions, arcs, initial marking).
     -   Text files containing the scenario descriptions.
     -   PDF visualizations of the Petri nets.
-    -   Organized directories for hand-made data, synthesized data (approved, manually rejected, auto-rejected).
+    -   Organized directories for hand-made data, synthesized data (approved, manually rejected, auto-rejected), and text generated outputs.
 
 ## Features
 
 *   **LLM-Powered Data Synthesis:** Uses Google's Gemini model to generate new scenario descriptions and Petri net JSON.
-*   **Paraphrasing:** Creates variations of existing scenario texts.
-*   **Forward Generation:** Generates entirely new (text, Petri net JSON) pairs, involving a manual review step.
+*   **Paraphrasing:** Creates variations of existing scenario texts while preserving their underlying Petri net structure.
+*   **Forward Generation:** Generates entirely new (text, Petri net JSON) pairs from scratch, involving a manual review step.
+*   **User Text-to-Petri Generation:** Allows users to input scenario text directly and receive corresponding Petri net JSON and PDF visualization.
 *   **Schema and Logic Validation:** Ensures generated Petri nets adhere to a predefined JSON schema ([schemas/petri_net_schema.json](schemas/petri_net_schema.json)) and logical rules.
 *   **PDF Visualization:** Converts Petri net JSON into human-readable PDF diagrams using Graphviz.
-*   **Command-Line Interface:** Provides tools for data synthesis, validation, and visualization via `src/main.py`.
-*   **Organized Data Management:** Systematically stores input data, generated outputs, and intermediate files.
+*   **Command-Line Interface:** Provides comprehensive tools for data synthesis, validation, and visualization via `src/main.py`.
+*   **Organized Data Management:** Systematically stores input data, generated outputs, and intermediate files in structured directories.
+*   **Flexible Few-shot Learning:** Supports configurable few-shot prompting using hand-made examples to improve generation quality.
 
 ## Technology Stack
 
@@ -53,23 +57,28 @@ This project focuses on generating, validating, and visualizing Petri net data s
 │   ├── ...
 │   └── hand_made/
 ├── outputs/              # All generated files
-│   ├── review_temp/      # Temporary files for manual review
-│   └── synthesized_data/ # Persisted synthesized data
-│       ├── approved/
-│       ├── invalid_auto_rejected/
-│       └── rejected_manual/
+│   ├── generated_from_text/    # Ad-hoc text-to-JSON generation results
+│   ├── model_checkpoints/      # Fine-tuning model checkpoints
+│   ├── review_temp/            # Temporary files for manual review
+│   ├── synthesized_data/       # Persisted synthesized data
+│   │   ├── approved/           # Manually approved generated samples
+│   │   ├── invalid_auto_rejected/  # Invalid samples auto-rejected
+│   │   └── rejected_manual/    # Manually rejected samples
+│   ├── train_data/            # Training data for fine-tuning
+│   └── val_data/              # Validation data for fine-tuning
 ├── schemas/
 │   └── petri_net_schema.json # JSON schema for Petri net data
 └── src/                  # Source code
     ├── __init__.py
     ├── config.py         # Configuration settings and paths
     ├── data_synthesis.py # Logic for LLM-based data generation
+    ├── generate_from_text.py # User text-to-JSON generation
+    ├── inference.py      # CLI to generate JSON from user-entered scenario text
     ├── llm_interaction.py  # Interface for communicating with the LLM
     ├── main.py           # Command-line interface entry point
     ├── petri_net_utils.py  # Utilities for Petri net visualization
-    ├── validation.py     # Petri net validation logic
     ├── train_model.py    # Fine-tune a model on (scenario text → Petri-net JSON)
-    └── inference.py      # CLI to generate JSON from user-entered scenario text
+    └── validation.py     # Petri net validation logic
 ```
 
 ## Setup and Installation
@@ -130,7 +139,22 @@ python src/main.py <action> [options]
     ```
     During this process, candidates are saved in `outputs/review_temp/`. You will be prompted in the console to approve or reject each candidate.
 
-3.  **`validate_sample`**: Validate an existing Petri net JSON file.
+3.  **`generate_from_text`** (alias: **`gft`**): Generate Petri-Net JSON from ad-hoc scenario text.
+    *   Takes scenario text, generates Petri Net JSON, and saves the input text, output JSON, and a PDF visualization to a new numbered subfolder in `outputs/generated_from_text/`.
+    *   `--scenario_text <text>` (aliases: `-s`, `--text`): Your scenario description. If omitted, you'll be prompted interactively.
+    *   `--num_few_shot <N>` (alias: `-nfs`): Number of hand-made examples to use for few-shot prompting (default: 0).
+    *   `--model_name <model>` (alias: `-m`): Model to use (default: as configured, e.g., `gemini-2.5-flash-preview-05-20`).
+    *   `--temperature <T>` (alias: `-t`): Sampling temperature for LLM (0.0-1.0, default: 0.2).
+    *Example:*
+    ```bash
+    python src/main.py generate_from_text --scenario_text "A user watches a video, can pause it, and then resume."
+    ```
+    *Interactive Example (prompts for text):*
+    ```bash
+    python src/main.py gft --num_few_shot 1
+    ```
+
+4.  **`validate_sample`**: Validate an existing Petri net JSON file.
     *   `--sample_id <id>`: (Required) Stem of the sample file.
         *   For hand-made: e.g., `sample_01`.
         *   For synthesized: e.g., `gen_approved_abcdef12`.
@@ -141,10 +165,10 @@ python src/main.py <action> [options]
     python src/main.py validate_sample --sample_id sample_01 --data_type hand_made
     ```
 
-4.  **`visualize_sample`**: Generate a new PDF visualization for an existing sample.
+5.  **`visualize_sample`**: Generate a new PDF visualization for an existing sample.
     *   `--sample_id <id>`: (Required) Stem of the sample file (same as for `validate_sample`).
     *   `--data_type <type>`: (Required) Choices: `hand_made`, `synthesized`.
-    *The visualization will be saved in `outputs/review_temp/` with an `_adhoc_viz` suffix.*
+    *The visualization will be saved in `outputs/review_temp/`*
     *Example:*
     ```bash
     python src/main.py visualize_sample --sample_id gen_approved_2898622b --data_type synthesized

@@ -1,0 +1,126 @@
+{
+  "places": {
+    "p_forest_path": "Forest Path",
+    "p_deeper_forest": "Deeper Forest Area",
+    "p_riverside": "Riverside Area",
+    "p_observing_wildlife": "Observing Wildlife",
+    "p_listening_water": "Listening to Water Sounds",
+    "p_meditating": "Meditating",
+    "p_walk_ended": "Nature Walk Ended"
+  },
+  "transitions": {
+    "t_go_deeper": "Go to Deeper Forest",
+    "t_go_riverside": "Go to Riverside",
+    "t_start_observe": "Start Observing Wildlife",
+    "t_finish_observe": "Finish Observing Wildlife",
+    "t_take_photo_and_return": "Take Photo & Return to Deeper Forest",
+    "t_start_listen": "Start Listening to Water Sounds",
+    "t_finish_listen": "Finish Listening to Water Sounds",
+    "t_start_meditation": "Start Meditation",
+    "t_end_meditation_and_return": "End Meditation & Return to Riverside",
+    "t_return_from_deeper": "Return from Deeper Forest to Path",
+    "t_return_from_riverside": "Return from Riverside to Path",
+    "t_end_walk": "End Nature Walk"
+  },
+  "arcs": [
+    {
+      "from": "p_forest_path",
+      "to": "t_go_deeper"
+    },
+    {
+      "from": "t_go_deeper",
+      "to": "p_deeper_forest"
+    },
+    {
+      "from": "p_forest_path",
+      "to": "t_go_riverside"
+    },
+    {
+      "from": "t_go_riverside",
+      "to": "p_riverside"
+    },
+    {
+      "from": "p_forest_path",
+      "to": "t_end_walk"
+    },
+    {
+      "from": "t_end_walk",
+      "to": "p_walk_ended"
+    },
+    {
+      "from": "p_deeper_forest",
+      "to": "t_start_observe"
+    },
+    {
+      "from": "t_start_observe",
+      "to": "p_observing_wildlife"
+    },
+    {
+      "from": "p_deeper_forest",
+      "to": "t_return_from_deeper"
+    },
+    {
+      "from": "t_return_from_deeper",
+      "to": "p_forest_path"
+    },
+    {
+      "from": "p_observing_wildlife",
+      "to": "t_finish_observe"
+    },
+    {
+      "from": "t_finish_observe",
+      "to": "p_deeper_forest"
+    },
+    {
+      "from": "p_observing_wildlife",
+      "to": "t_take_photo_and_return"
+    },
+    {
+      "from": "t_take_photo_and_return",
+      "to": "p_deeper_forest"
+    },
+    {
+      "from": "p_riverside",
+      "to": "t_start_listen"
+    },
+    {
+      "from": "t_start_listen",
+      "to": "p_listening_water"
+    },
+    {
+      "from": "p_riverside",
+      "to": "t_return_from_riverside"
+    },
+    {
+      "from": "t_return_from_riverside",
+      "to": "p_forest_path"
+    },
+    {
+      "from": "p_listening_water",
+      "to": "t_finish_listen"
+    },
+    {
+      "from": "t_finish_listen",
+      "to": "p_riverside"
+    },
+    {
+      "from": "p_listening_water",
+      "to": "t_start_meditation"
+    },
+    {
+      "from": "t_start_meditation",
+      "to": "p_meditating"
+    },
+    {
+      "from": "p_meditating",
+      "to": "t_end_meditation_and_return"
+    },
+    {
+      "from": "t_end_meditation_and_return",
+      "to": "p_riverside"
+    }
+  ],
+  "initial": {
+    "p_forest_path": 1
+  }
+}
