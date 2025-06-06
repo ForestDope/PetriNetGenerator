@@ -2,7 +2,7 @@
 import json
 from graphviz import Digraph, CalledProcessError
 from pathlib import Path
-import shutil  # For checking if dot is in PATH
+import shutil
 
 
 def petri_json_to_dot(
@@ -22,17 +22,13 @@ def petri_json_to_dot(
                (None, None) if PDF rendering fails.
     """
     if not isinstance(petri_json_data, dict):
-        print(
-            "  Error (petri_json_to_dot): Input petri_json_data must be a dictionary."
-        )
+        print("Error: Input petri_json_data must be a dictionary.")
         return None, None
     if not filename:
-        print(
-            "  Error (petri_json_to_dot): Filename cannot be empty for visualization."
-        )
+        print("Error: Filename cannot be empty for visualization.")
         return None, None
     if not isinstance(output_dir, Path):
-        print("  Error (petri_json_to_dot): output_dir must be a Path object.")
+        print("Error: output_dir must be a Path object.")
         return None, None
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -80,71 +76,42 @@ def petri_json_to_dot(
         if arc_from and arc_to:
             dot_graph.edge(arc_from, arc_to)
         else:
-            print(
-                f"  Warning (petri_json_to_dot): Skipping invalid arc (index {arc_idx}) in visualization: {arc}"
-            )
+            print(f"Warning: Skipping invalid arc (index {arc_idx}): {arc}")
 
-    # Define the expected PDF output path
-    # `filename` is the base name, e.g., "candidate_xxxx"
-    # `render` will save the PDF to `output_dir / filename.pdf`
     pdf_file_path = output_dir / f"{filename}.pdf"
 
     # Clean up any pre-existing PDF file with this name to avoid confusion from previous runs
     if pdf_file_path.exists():
         pdf_file_path.unlink(missing_ok=True)
 
-    rendered_pdf_actual_path_str = None  # Stores the path string returned by render()
     try:
-        # render() will create a temporary DOT source file (e.g., `output_dir/filename`)
-        # and then the PDF file (e.g., `output_dir/filename.pdf`).
-        # cleanup=True ensures the temporary DOT source file is deleted by the library.
         rendered_pdf_actual_path_str = dot_graph.render(
-            filename=filename,  # Base name for files.
+            filename=filename,
             directory=str(output_dir),
             format="pdf",
-            cleanup=True,  # IMPORTANT: Deletes the intermediate DOT source file
-            quiet=True,  # Suppress console output from graphviz library
+            cleanup=True,
+            quiet=True,
         )
 
-        # After render, check if the PDF file exists at the expected path.
-        # rendered_pdf_actual_path_str should be equivalent to str(pdf_file_path)
-
         if pdf_file_path.exists():
-            # PDF was successfully created
-            # print(f"  Visualization rendered to PDF at: {pdf_file_path.resolve()}")
-            return pdf_file_path, None  # Return path to PDF, None for GV path
+            return pdf_file_path, None
         else:
-            # PDF was not found, even if render didn't throw an immediate error
             print(
-                f"  Error (petri_json_to_dot): PDF file creation failed for '{filename}' in '{output_dir}'. Expected at '{pdf_file_path}'. Render reported: {rendered_pdf_actual_path_str}"
+                f"Error: PDF file creation failed for '{filename}' in '{output_dir}'."
             )
             return None, None
 
     except CalledProcessError as cpe:
-        # This exception means the 'dot' command (or other Graphviz executable) failed.
         print(
-            f"  Error (petri_json_to_dot): Graphviz 'dot' command failed during PDF rendering for '{filename}'."
+            f"Error: Graphviz 'dot' command failed during PDF rendering for '{filename}'."
         )
-        print(f"  Command: {' '.join(cpe.cmd) if cpe.cmd else 'Unknown'}")
-        print(f"  Return Code: {cpe.returncode}")
-        print(
-            f"  Stdout: {cpe.stdout.decode(errors='ignore').strip() if cpe.stdout else 'N/A'}"
-        )
-        print(
-            f"  Stderr: {cpe.stderr.decode(errors='ignore').strip() if cpe.stderr else 'N/A'}"
-        )
+        print(f"Command: {' '.join(cpe.cmd) if cpe.cmd else 'Unknown'}")
         if shutil.which("dot") is None:
             print(
-                "  CRITICAL: The 'dot' command (Graphviz executable) was not found in your system's PATH."
+                "CRITICAL: The 'dot' command (Graphviz executable) was not found in your system's PATH."
             )
-        print(
-            "  Ensure Graphviz is installed correctly and its 'bin' directory is in your system's PATH."
-        )
-        return None, None  # PDF creation failed
+        return None, None
 
     except Exception as e:
-        # Catch any other unexpected errors during the process.
-        print(
-            f"  Error (petri_json_to_dot): An unexpected error occurred while generating PDF for '{filename}': {e.__class__.__name__}: {e}"
-        )
-        return None, None  # PDF creation likely failed
+        print(f"Error: Unexpected error generating PDF for '{filename}': {e}")
+        return None, None

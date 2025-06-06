@@ -1,4 +1,3 @@
-# src/validation.py
 import json
 import uuid
 from jsonschema import validate, ValidationError
@@ -6,8 +5,8 @@ from src.config import (
     PETRI_NET_SCHEMA_PATH,
     OUTPUTS_DIR,
     INVALID_AUTO_REJECTED_DIR,
-)  # Ensure OUTPUTS_DIR is imported
-from pathlib import Path  # To handle file paths
+)
+from pathlib import Path
 
 
 def load_petri_net_schema():
@@ -142,10 +141,7 @@ def save_auto_rejected_sample(
     """Saves the auto-rejected (structurally invalid) Petri Net JSON to a dedicated directory."""
     try:
         timestamp = uuid.uuid4().hex[:8]
-        # Sanitize reason for filename
-        safe_reason = "".join(
-            c if c.isalnum() else "_" for c in reason[:30]
-        )  # Limit length and make alphanumeric
+        safe_reason = "".join(c if c.isalnum() else "_" for c in reason[:30])
 
         invalid_filename_base = (
             f"{original_filename_base}_autorejected_{safe_reason}_{timestamp}"

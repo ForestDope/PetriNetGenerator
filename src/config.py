@@ -23,21 +23,19 @@ SYNTHESIZED_REJECTED_MANUAL_DIR = SYNTHESIZED_PARENT_DIR / "rejected_manual"
 INVALID_AUTO_REJECTED_DIR = SYNTHESIZED_PARENT_DIR / "invalid_auto_rejected"
 
 REVIEW_TEMP_DIR = OUTPUTS_DIR / "review_temp"
-# VISUALIZATIONS_DIR = OUTPUTS_DIR / "visualizations" # REMOVED if not used as default
 
 PETRI_NET_SCHEMA_PATH = SCHEMAS_DIR / "petri_net_schema.json"
 
 # Directories for training/validation splits
 TRAIN_DATA_DIR = OUTPUTS_DIR / "train_data"
 VAL_DATA_DIR = OUTPUTS_DIR / "val_data"
-
 GENERATED_FROM_TEXT_DIR = OUTPUTS_DIR / "generated_from_text"
 
 # Ensure Directories Exist
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 HAND_MADE_DIR.mkdir(parents=True, exist_ok=True)
 SCHEMAS_DIR.mkdir(parents=True, exist_ok=True)
-OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)  # Parent output dir
+OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
 
 SYNTHESIZED_PARENT_DIR.mkdir(parents=True, exist_ok=True)
 SYNTHESIZED_APPROVED_DIR.mkdir(parents=True, exist_ok=True)

@@ -12,7 +12,6 @@ from config import (
     SYNTHESIZED_REJECTED_MANUAL_DIR,
     HAND_MADE_DIR,
     REVIEW_TEMP_DIR,
-    # VISUALIZATIONS_DIR is no longer used as a default dump for candidate viz
 )
 
 
@@ -50,7 +49,7 @@ def get_next_approved_folder_index(approved_dir: Path):
     return max_index + 1
 
 
-# --- Helper to save FINAL samples (text, JSON) to specific directories ---
+# --- Helper to save final samples (text, JSON) to specific directories ---
 def save_final_sample_files(
     text_content,
     petri_json_data,
@@ -59,17 +58,12 @@ def save_final_sample_files(
     status_suffix: str,
     use_numbered_subfolder: bool = True,
 ):
-    """
-    Saves text and JSON. Approved samples go into numbered subfolders.
-    Returns the actual save directory and the final filename stem.
-    original_candidate_base is expected to be like "candidate_uuidpart"
-    """
-    # Extract UUID part from "candidate_uuidpart" or use the whole thing if no "candidate_"
+    """Saves text and JSON. Approved samples go into numbered subfolders."""
     if "candidate_" in original_candidate_base:
         name_parts = original_candidate_base.split("_")
         uuid_part = name_parts[-1] if len(name_parts) > 1 else original_candidate_base
-        clean_base_name = "gen"  # Default prefix if only UUID was part of candidate_
-    else:  # Should not happen if we always use candidate_id_base
+        clean_base_name = "gen"
+    else:
         uuid_part = original_candidate_base
         clean_base_name = "gen"
 
@@ -98,7 +92,6 @@ def save_final_sample_files(
         return None, None
 
 
-# --- Data Synthesis Method 1: Paraphrasing ---
 def synthesize_paraphrases(
     original_text,
     original_petri_json,
@@ -140,11 +133,7 @@ Separate paraphrases with '---PARAPHRASE_SEPARATOR---'.
         paraphrase_text = paraphrase_text.strip()
         if paraphrase_text:
             print(f"  Generated Paraphrase {i+1}: '{paraphrase_text[:100]}...'")
-            # Save paraphrases into numbered approved folders
-            # The base name for paraphrases will be derived from original sample_base_name
-            paraphrase_candidate_base = (
-                f"{sample_base_name}_paraphrase{i+1}"  # Unique base for this paraphrase
-            )
+            paraphrase_candidate_base = f"{sample_base_name}_paraphrase{i+1}"
             save_final_sample_files(
                 paraphrase_text,
                 original_petri_json,
@@ -160,7 +149,7 @@ Separate paraphrases with '---PARAPHRASE_SEPARATOR---'.
         print("No valid paraphrases extracted.")
     else:
         print(
-            f"Saved {generated_count} paraphrased samples to numbered subfolders in {SYNTHESIZED_APPROVED_DIR.resolve()}."
+            f"Saved {generated_count} paraphrased samples to {SYNTHESIZED_APPROVED_DIR.resolve()}."
         )
 
 
@@ -190,7 +179,6 @@ def build_few_shot_prompt_from_handmade(num_examples=2):
     return prompt_str
 
 
-# --- Data Synthesis Method 2: Forward Generation (Text + JSON) ---
 def synthesize_forward_generation(
     few_shot_examples_text, num_new_samples=1, theme=None
 ):
@@ -199,7 +187,6 @@ def synthesize_forward_generation(
     )
     if theme:
         print(f"Using theme: '{theme}'")
-    # Prepare a theme header for the LLM prompt (empty if no theme)
     theme_instruction = f"Theme: {theme}\n\n" if theme else ""
 
     # --- FULL System Instruction (ensure your complete prompt is here) ---
@@ -218,7 +205,7 @@ Key constraints for the JSON:
 7. Mix of sequences, choices, concurrency.
 8. All nodes connected (unless trivial net).
 9. Model "return to menu" or "play again" as cycles back to earlier places, not new terminal states.
-10. Actions generally available for a primary state (e.g., 'Video Playing') should be accessible from its sub-modes (e.g., 'Full Screen') unless explicitly restricted.
+10. Actions generally available for a primary state should be accessible from its sub-modes unless explicitly restricted.
 You MUST output your response as a single, valid JSON object for EACH generated sample with "scenario_text" and "petri_net_json" keys.
 Example (looping):
 {{
@@ -253,7 +240,6 @@ Ensure your output is a single JSON object adhering strictly to the format speci
         )
         candidate_id_base = f"candidate_{uuid.uuid4().hex[:8]}"
 
-        # ... (LLM call and initial validation for new_text, new_petri_json as before) ...
         generated_pair_dict = get_llm_response(
             prompt_text=user_prompt_template,
             system_instruction=system_instruction,
@@ -299,7 +285,6 @@ Ensure your output is a single JSON object adhering strictly to the format speci
         temp_json_path = REVIEW_TEMP_DIR / f"{candidate_id_base}_petri.json"
 
         temp_pdf_for_review: Path | None = None
-        # temp_gv_for_review is no longer needed as petri_json_to_dot doesn't return a persistent GV path
 
         try:
             with open(temp_text_path, "w", encoding="utf-8") as f:
@@ -315,9 +300,7 @@ Ensure your output is a single JSON object adhering strictly to the format speci
         )
 
         try:
-            # Generate PDF in REVIEW_TEMP_DIR for viewing
-            # petri_json_to_dot now returns (Path | None, None)
-            pdf_path_obj, _ = petri_json_to_dot(  # Second value is always None
+            pdf_path_obj, _ = petri_json_to_dot(
                 new_petri_json, filename=candidate_id_base, output_dir=REVIEW_TEMP_DIR
             )
             if pdf_path_obj and pdf_path_obj.exists():
@@ -325,7 +308,7 @@ Ensure your output is a single JSON object adhering strictly to the format speci
                 print(
                     f"  Visualization for review (PDF): {temp_pdf_for_review.resolve()}"
                 )
-            else:  # Covers case where pdf_path_obj is None or doesn't exist
+            else:
                 print(f"  PDF Visualization generation for review failed.")
         except Exception as e:
             print(f"  Warning: Error calling petri_json_to_dot for review: {e}")
@@ -341,7 +324,6 @@ Ensure your output is a single JSON object adhering strictly to the format speci
             print(f"    JSON: {temp_json_path.name}")
         if temp_pdf_for_review:
             print(f"    Viz PDF: {temp_pdf_for_review.name}")
-        # No separate GV file to list here from petri_json_to_dot's return
         print(
             f"\n  Full Scenario Text:\n{new_text}\n\n  Full Petri Net JSON:\n{json.dumps(new_petri_json, indent=2)}\n"
         )
@@ -370,44 +352,33 @@ Ensure your output is a single JSON object adhering strictly to the format speci
             if is_approved:
                 generated_and_approved_count += 1
             print(
-                f"  Sample {status_suffix_for_sample}. Text/JSON saved to: {final_save_dir.resolve()} with stem: {final_filename_stem}"
+                f"  Sample {status_suffix_for_sample}. Text/JSON saved to: {final_save_dir.resolve()}"
             )
 
-            # --- Generate NEW PDF directly into the final location ---
             print(
                 f"  Generating final PDF visualization in: {final_save_dir.resolve()}"
             )
-            # petri_json_to_dot now returns (Path | None, None)
-            final_pdf_path, _ = petri_json_to_dot(  # Second value is always None
+            final_pdf_path, _ = petri_json_to_dot(
                 new_petri_json,
-                filename=final_filename_stem,  # Use the new final stem
-                output_dir=final_save_dir,  # Save directly to final sample folder
+                filename=final_filename_stem,
+                output_dir=final_save_dir,
             )
             if final_pdf_path and final_pdf_path.exists():
                 print(f"  Final PDF visualization saved: {final_pdf_path.resolve()}")
             else:
-                print(
-                    f"  Failed to generate final PDF visualization in {final_save_dir.resolve()}"
-                )
+                print(f"  Failed to generate final PDF visualization")
         else:
-            print(
-                "  Error during final saving of text/JSON. Final visualization not generated."
-            )
+            print("  Error during final saving of text/JSON.")
 
         # --- Cleanup temporary files from REVIEW_TEMP_DIR ---
         files_to_clean_in_review_temp = [temp_text_path, temp_json_path]
         if temp_pdf_for_review:
             files_to_clean_in_review_temp.append(temp_pdf_for_review)
-        # temp_gv_for_review is no longer tracked or returned by petri_json_to_dot
 
-        # print(f"  [DEBUG] Files to cleanup in review_temp: {[f.name for f in files_to_clean_in_review_temp if f and f.exists()]}")
         for f_path in files_to_clean_in_review_temp:
-            if (
-                f_path and f_path.exists() and f_path.parent == REVIEW_TEMP_DIR
-            ):  # Check parent to be safe
+            if f_path and f_path.exists() and f_path.parent == REVIEW_TEMP_DIR:
                 try:
                     f_path.unlink()
-                    # print(f"  Cleaned up temp review file: {f_path.name}")
                 except OSError as e:
                     print(
                         f"  Warning: Could not delete temp review file {f_path.name}: {e}"

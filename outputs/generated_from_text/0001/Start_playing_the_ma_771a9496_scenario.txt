@@ -1,1 +1,0 @@
-Start playing the main presentation video. At the same time, begin downloading a related PDF document in the background. The video playback can finish independently of the download.

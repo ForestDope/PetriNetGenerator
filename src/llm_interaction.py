@@ -38,9 +38,7 @@ def get_llm_response(
                      Returns None on failure.
     """
     if not GOOGLE_API_KEY:
-        print(
-            "Error: Gemini API key not configured or configuration failed. LLM calls disabled."
-        )
+        print("Error: Gemini API key not configured. LLM calls disabled.")
         return None
 
     try:
@@ -57,49 +55,29 @@ def get_llm_response(
             **generation_config_args
         )
 
-        print(f"\n--- Sending Prompt to Gemini ({model_name}) ---")
-        if system_instruction:
-            print(
-                f"System Instruction (first 100 chars): {system_instruction[:100]}..."
-            )
-        print(f"User Prompt (first 150 chars): {prompt_text[:150]}...")
+        print(f"\nSending prompt to Gemini ({model_name})")
         print(f"Temperature: {temperature}, JSON Mode: {json_mode}")
-        print("--- --- ---")
 
         response = model_instance.generate_content(
             prompt_text, generation_config=current_generation_config
         )
 
-        # Gemini API can sometimes return an empty parts list if content is blocked
         if not response.parts:
-            print(
-                "Warning: Gemini response contained no parts. This might indicate blocked content or an issue."
-            )
+            print("Warning: Gemini response contained no parts.")
             if hasattr(response, "prompt_feedback") and response.prompt_feedback:
                 print(f"Prompt Feedback: {response.prompt_feedback}")
             return None
 
-        response_text = response.text  # Accesses the combined text from all parts
-
-        print("\n--- Gemini Raw Response (first 200 chars) ---")
-        print(f"{response_text[:200]}...")
-        print("--- --- ---")
+        response_text = response.text
 
         if json_mode:
             try:
                 return json.loads(response_text)
             except json.JSONDecodeError as e:
-                print(
-                    f"Error: LLM was asked for JSON but output was not valid JSON: {e}"
-                )
-                print(f"LLM Raw Output for JSON Mode: {response_text}")
+                print(f"Error: LLM output was not valid JSON: {e}")
                 return None
         return response_text
 
     except Exception as e:
-        print(f"Error calling Gemini API or processing response: {e}")
-        # Check for prompt feedback in case of errors
-        # Note: 'response' variable might not be defined if the error happened before API call
-        # This part would be better handled if you have the `response` object available from a partial success
-        # For now, this is a general catch.
+        print(f"Error calling Gemini API: {e}")
         return None

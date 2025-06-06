@@ -15,7 +15,6 @@ def main(
     length_penalty: float,
     device: str,
 ):
-    # If top‐level dir has no config.json, pick latest "checkpoint-*" subfolder
     cfg = Path(model_dir) / "config.json"
     if not cfg.exists():
         ckpts = [
@@ -47,7 +46,6 @@ def main(
         "Scenario:\n"
     )
     prompt = f"{prefix}{scenario}\n\nJSON:"
-    print("\n[DEBUG] Model prompt:\n" + prompt + "\n")
 
     # 4) tokenize
     inputs = tokenizer(
@@ -79,7 +77,7 @@ def main(
 
 
 if __name__ == "__main__":
-    p = argparse.ArgumentParser(description="JSON‐only inference")
+    p = argparse.ArgumentParser(description="JSON inference")
     p.add_argument("--model_dir", default="outputs/model_checkpoints")
     p.add_argument("--max_length", type=int, default=512)
     p.add_argument("--num_beams", type=int, default=4)

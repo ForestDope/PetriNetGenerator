@@ -8,14 +8,10 @@ from transformers import (
     TrainingArguments,
 )
 
-# Device check
 if torch.cuda.is_available():
     print(f"CUDA available. Using GPU: {torch.cuda.get_device_name(0)}")
 else:
-    print(
-        "Warning: CUDA not available. Training will proceed on CPU. "
-        "Install a CUDA-enabled torch package separately if you need GPU."
-    )
+    print("Warning: CUDA not available. Training will proceed on CPU.")
 
 from datasets import Dataset
 from config import SYNTHESIZED_APPROVED_DIR, TRAIN_DATA_DIR, VAL_DATA_DIR
@@ -47,11 +43,7 @@ def split_and_save(pairs, train_ratio=0.8):
 
 
 def semantic_loss(preds, labels):
-    """
-    Placeholder for graph-level Petri-net loss.
-    E.g., compute structural similarity / isomorphism instead of raw token MSE.
-    """
-    # TODO: implement custom graph comparison
+    """Placeholder for graph-level Petri-net loss."""
     return None
 
 
@@ -60,9 +52,6 @@ class PetriTrainer(Trainer):
         outputs = model(**inputs)
         # default CE loss
         loss = super().compute_loss(model, inputs, return_outputs=False)
-        # if you have logits -> decode and apply semantic_loss here
-        # sem = semantic_loss(decoded_preds, decoded_labels)
-        # combine: loss = loss + alpha*sem
         return (loss, outputs) if return_outputs else loss
 
 
@@ -71,7 +60,7 @@ def main():
     parser.add_argument(
         "--model",
         default="Salesforce/codet5-base",
-        help="CodeT5 model for JSON‐generation",
+        help="CodeT5 model for JSON generation",
     )
     parser.add_argument("--train_ratio", type=float, default=0.8)
     parser.add_argument("--epochs", type=int, default=3)
@@ -94,7 +83,6 @@ def main():
     tok = AutoTokenizer.from_pretrained(args.model)
 
     def preprocess(batch):
-        # batch["text"] and batch["petri_json"] are lists
         inputs = ["generate_petri_json: " + t for t in batch["text"]]
         model_inputs = tok(
             inputs, truncation=True, padding="max_length", max_length=256
