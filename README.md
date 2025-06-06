@@ -1,6 +1,6 @@
-# Petri Net Data Synthesis from Multimedia Scenarios
+# Petri Net Data Synthesis and Generation from Multimedia Scenarios
 
-This project focuses on generating, validating, and visualizing Petri net data structures from textual descriptions of multimedia scenarios. It leverages a Large Language Model (LLM) for synthesizing new data pairs (scenario text and corresponding Petri net JSON) and provides tools for managing and inspecting these datasets.
+This project focuses on generating, validating, and visualizing Petri net data structures from textual descriptions of multimedia scenarios. It leverages a Large Language Model (LLM) for synthesizing new data pairs (scenario text and corresponding Petri net JSON) and provides tools for managing and inspecting these datasets. The user can also generate Petri nets from a scenario text.
 
 ## Overview
 
