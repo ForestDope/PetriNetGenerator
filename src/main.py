@@ -206,6 +206,14 @@ def cli_generate_from_text_handler(args):
         print(json.dumps(generated_data, indent=2))
         return
 
+    # Validate the generated data using the json and the validation function
+    is_valid, validation_message = validate_petri_net_json(petri_net_json)
+    if not is_valid:
+        print(f"Generated Petri Net JSON is INVALID: {validation_message}")
+        print("LLM Raw Output:")
+        print(json.dumps(generated_data, indent=2))
+        return
+
     print("\n--- LLM Generated Output ---")
     print(json.dumps(generated_data, indent=2))
 
@@ -362,7 +370,7 @@ def main():
         "--temperature",
         "-t",
         type=float,
-        default=0.2,
+        default=0.4,
         help="Sampling temperature for LLM (default: 0.2).",
     )
     p_gft.set_defaults(func=cli_generate_from_text_handler)
